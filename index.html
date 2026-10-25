@@ -4,564 +4,603 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nishanth Madthila · Field Notes</title>
-<meta name="description" content="Nishanth Madthila: AI/ML engineer. A field notebook of agent platforms, computer vision and small things noticed along the way.">
+<meta name="description" content="Nishanth Madthila: AI/ML engineer building agent platforms, computer vision and LLM inference tools. Field notes from Bangalore to Pittsburgh.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@400;600;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@500;700;900&family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
 <style>
-/* Layout: an expedition field notebook lying open on a dark desk. Pages turn like paper (StPageFlip); under 900px it becomes a stack of pages you scroll. All page type is sized from page width (cqw) so a page always holds the same content. */
+/* Layout: one collage board, kraft paper laid over an old topo map, with ten torn prints and vintage cutouts pinned on it. A print flies to the centre and flips to show its notes. Under 820px the board becomes a two-column scrolling collage. Single deliberate light look. */
 :root {
-  --desk: #1b201c;
-  --desk-2: #262d27;
-  --leather: #2d3f31;
-  --leather-dk: #1d2a20;
-  --paper: #ebe2cd;
-  --paper-2: #e2d7bd;
-  --ink: #2a251e;
-  --pencil: #6b6455;
-  --rust: #9c4a26;
-  --brass: #b9975a;
-  --brass-hi: #e0c48a;
-  --slab: "Rokkitt", "Rockwell", "Courier New", serif;
-  --serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
-  --type: "Courier Prime", "Courier New", ui-monospace, monospace;
-  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  color-scheme: dark;
+  --map: #d8cba8;
+  --map-ink: rgba(104, 84, 52, .38);
+  --water: #9fb3ad;
+  --kraft: #c9a878;
+  --kraft-lt: #dcc49c;
+  --paper: #f4efe3;
+  --ink: #2a241c;
+  --pencil: #6a6050;
+  --rust: #9b4826;
+  --forest: #3b4e39;
+  --brass: #a8874a;
+  --tape: rgba(236, 224, 194, .78);
+  --slab: "Rokkitt", "Rockwell", Georgia, serif;
+  --typed: "Special Elite", "Courier Prime", "Courier New", monospace;
+  --mono: "Courier Prime", "Courier New", ui-monospace, monospace;
+  --serif: "Source Serif 4", Georgia, serif;
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.2  0 0 0 0 0.15  0 0 0 0 0.08  0 0 0 .45 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  color-scheme: light;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { margin: 0; }
 body {
-  min-height: 100vh; background: var(--desk); color: var(--paper);
-  font: 400 16px/1.5 var(--serif); -webkit-font-smoothing: antialiased;
-  background-image: var(--grain), radial-gradient(1200px 700px at 50% 30%, var(--desk-2), var(--desk) 70%);
-  background-blend-mode: soft-light, normal;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: #2b241b; color: var(--ink); font: 400 16px/1.5 var(--serif); -webkit-font-smoothing: antialiased;
+  background-image: var(--grain), radial-gradient(1400px 800px at 50% 20%, #3a3124, #221c15 75%);
 }
 a { color: inherit; }
-:focus-visible { outline: 2px solid var(--brass-hi); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
 
-.top { max-width: 1180px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-block: 20px 10px; font: 400 13px/1.2 var(--type); color: #a39d8c; letter-spacing: .04em; }
-.top nav { display: flex; gap: 18px; flex-wrap: wrap; }
-.top nav a { text-decoration: none; }
-.top nav a:hover { color: var(--brass-hi); }
-
-.desk { max-width: 1180px; margin: 0 auto; padding-block: 18px 12px; }
-#book { margin: 0 auto; }
-.controls { display: flex; justify-content: center; align-items: center; gap: 18px; padding-block: 20px 8px; font: 400 13px/1 var(--type); color: #a39d8c; }
-.controls button { font: 700 13px/1 var(--type); color: var(--paper); background: transparent; border: 1px solid rgba(235,226,205,.25); border-radius: 999px; padding: 10px 16px; cursor: pointer; letter-spacing: .06em; }
-.controls button:hover { border-color: var(--brass); color: var(--brass-hi); }
-.controls output { min-width: 9ch; text-align: center; font-variant-numeric: tabular-nums; }
-.hint { text-align: center; font: italic 400 13px/1.4 var(--type); color: #8a8574; margin: 0 0 30px; }
-footer { max-width: 1180px; margin: 0 auto; padding-block: 18px 34px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font: 400 12px/1.5 var(--type); color: #7e7a6c; border-top: 1px solid rgba(235,226,205,.12); }
-
-/* ---------- pages ---------- */
-.page { container-type: inline-size; background: var(--paper); color: var(--ink); overflow: hidden; }
-.page-inner {
-  position: relative; height: 100%; padding: 2.4em 2.3em 2em; font-size: 3.05cqw;
-  background-image: var(--grain), linear-gradient(90deg, rgba(60,45,20,.10), transparent 9%, transparent 91%, rgba(60,45,20,.08));
-  background-blend-mode: multiply, normal;
+.topbar {
+  max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 10px 22px; justify-content: space-between; align-items: center;
+  padding: 16px max(16px, env(safe-area-inset-right, 0px)) 12px max(16px, env(safe-area-inset-left, 0px));
+  font: 400 13px/1.2 var(--mono); color: #cdbb98; letter-spacing: .04em;
 }
-.page-inner::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 4em rgba(90,70,30,.22); }
-.page.ruled .page-inner { background-image: var(--grain), repeating-linear-gradient(transparent 0 1.65em, rgba(60,80,110,.13) 1.65em calc(1.65em + 1px)); background-position: 0 0, 0 3.6em; }
-.folio { position: absolute; bottom: 1.3em; font: 400 .78em/1 var(--type); color: var(--pencil); letter-spacing: .08em; }
-.page:nth-child(even) .folio { left: 2.3em; } .page:nth-child(odd) .folio { right: 2.3em; }
+.topbar nav { display: flex; gap: 18px; flex-wrap: wrap; }
+.topbar a { text-decoration: none; }
+.topbar a:hover { color: #f0d9a8; }
 
-.eyebrow { font: 700 .72em/1 var(--type); letter-spacing: .2em; text-transform: uppercase; color: var(--rust); margin: 0 0 .7em; }
-.page h2 { font: 800 2.15em/1 var(--slab); margin: 0 0 .35em; letter-spacing: -.005em; text-wrap: balance; }
-.page h3 { font: 600 1.35em/1.1 var(--slab); margin: 0 0 .25em; }
-.page p { margin: 0 0 .75em; }
-.page .small { font-size: .9em; }
-.pencil { font: italic 400 .86em/1.4 var(--type); color: var(--pencil); }
-.page ul.log { margin: .2em 0 0; padding: 0; list-style: none; display: grid; gap: .45em; font-size: .93em; line-height: 1.42; }
-.page ul.log li { padding-left: 1.2em; position: relative; }
-.page ul.log li::before { content: "—"; position: absolute; left: 0; color: var(--rust); }
+/* ---------- the board ---------- */
+.board-wrap { max-width: 1320px; margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-right, 0px)) 18px max(16px, env(safe-area-inset-left, 0px)); }
+.board {
+  position: relative; aspect-ratio: 16 / 10.2; width: 100%; border-radius: 6px; overflow: hidden;
+  background-color: var(--map);
+  background-image:
+    var(--grain),
+    repeating-radial-gradient(ellipse 60% 45% at 18% 78%, transparent 0 13px, var(--map-ink) 13px 14px),
+    repeating-radial-gradient(ellipse 50% 60% at 88% 18%, transparent 0 11px, var(--map-ink) 11px 12px),
+    repeating-radial-gradient(ellipse 40% 30% at 70% 85%, transparent 0 9px, rgba(104,84,52,.28) 9px 10px),
+    linear-gradient(115deg, transparent 0 62%, var(--water) 62% 64.5%, transparent 64.5%),
+    linear-gradient(0deg, rgba(104,84,52,.14) 1px, transparent 1px), linear-gradient(90deg, rgba(104,84,52,.14) 1px, transparent 1px);
+  background-size: auto, auto, auto, auto, auto, 6.25% 9.8%, 6.25% 9.8%;
+  box-shadow: 0 30px 80px rgba(0,0,0,.55), inset 0 0 120px rgba(80,55,20,.35);
+  container-type: inline-size;
+}
+.kraft {
+  position: absolute; inset: 7% 5% 9% 7%;
+  background-color: var(--kraft-lt);
+  background-image: var(--grain), radial-gradient(ellipse at 40% 40%, rgba(255,240,210,.35), transparent 70%), linear-gradient(160deg, var(--kraft-lt), var(--kraft));
+  filter: drop-shadow(0 6px 10px rgba(60,40,10,.35));
+}
+.map-label { position: absolute; font: italic 400 1.05cqw/1 var(--serif); color: rgba(80,62,36,.75); letter-spacing: .25em; text-transform: uppercase; pointer-events: none; }
 
-/* rubber stamp */
+/* title on tape */
+.title {
+  position: absolute; left: 50%; top: 2.2%; transform: translateX(-50%) rotate(-1.2deg); z-index: 30;
+  padding: .9cqw 3.2cqw 1cqw; background: var(--tape); text-align: center;
+  clip-path: polygon(0 6%, 2% 0, 98% 3%, 100% 0, 99% 50%, 100% 96%, 97% 100%, 2% 97%, 0 100%, 1% 50%);
+  box-shadow: 0 2px 4px rgba(0,0,0,.08);
+}
+.title h1 { margin: 0; font: 900 3.4cqw/1 var(--slab); letter-spacing: .14em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+.title p { margin: .4cqw 0 0; font: 400 1.05cqw/1.2 var(--typed); color: var(--pencil); letter-spacing: .08em; }
+
+/* cards */
+.card {
+  all: unset; box-sizing: border-box; position: absolute; left: var(--x); top: var(--y); width: var(--w); z-index: var(--z, 5);
+  transform: rotate(var(--r)); cursor: pointer; transition: transform .35s cubic-bezier(.2,.7,.2,1), filter .35s;
+  filter: drop-shadow(0 .35cqw .5cqw rgba(40,25,5,.38));
+}
+.card:hover, .card:focus-visible { transform: rotate(calc(var(--r) * .4)) translateY(-.6cqw) scale(1.04); filter: drop-shadow(0 1.4cqw 1.4cqw rgba(40,25,5,.42)); z-index: 40; }
+.card:focus-visible { outline: none; }
+.card:focus-visible .tear { outline: 3px solid var(--rust); }
+.tear { position: relative; background: var(--paper); padding: 4.5% 4.5% 13%; }
+.tear::after { content: ""; position: absolute; inset: 0; background: var(--grain); opacity: .5; pointer-events: none; }
+.tear .ph { position: relative; aspect-ratio: var(--ar, 4 / 3); overflow: hidden; background: #4a4235; }
+.tear img, .face img { display: block; width: 100%; height: 100%; object-fit: cover; filter: sepia(.28) saturate(.8) contrast(1.05) brightness(.96); }
+.cap { position: absolute; left: 6%; right: 6%; bottom: 3.2%; font: 400 calc(var(--wn, 18) * .062cqw)/1.15 var(--typed); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cap small { color: var(--rust); letter-spacing: .06em; }
+.tape { position: absolute; width: 38%; height: 9%; background: var(--tape); z-index: 2; box-shadow: 0 1px 2px rgba(0,0,0,.08);
+  clip-path: polygon(0 10%, 4% 0, 96% 8%, 100% 0, 98% 50%, 100% 92%, 95% 100%, 3% 94%, 0 100%, 2% 50%); }
+.tape.t1 { top: -4%; left: 31%; transform: rotate(-4deg); }
+.tape.x1 { top: -3%; right: -7%; width: 30%; transform: rotate(38deg); }
+.tape.x2 { top: -3%; right: -7%; width: 30%; transform: rotate(-38deg); }
+.tape.c1 { bottom: -3%; left: -8%; width: 30%; transform: rotate(40deg); }
+.pin { position: absolute; top: 2.5%; left: 50%; width: 1.3cqw; height: 1.3cqw; margin-left: -.65cqw; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #e07a52, var(--rust) 60%, #5a2410); z-index: 3; box-shadow: 0 .2cqw .3cqw rgba(0,0,0,.35); }
+
+/* ticket (contact) */
+.ticket .tear { background: #e9dcc0; padding: 0; }
+.ticket-in { display: grid; grid-template-columns: 1fr auto; aspect-ratio: 2.3 / 1; }
+.ticket-main { padding: 7% 6%; border-right: .25cqw dashed rgba(42,36,28,.5); display: grid; align-content: center; gap: .4cqw; }
+.ticket-main b { font: 900 2.1cqw/1 var(--slab); letter-spacing: .06em; text-transform: uppercase; }
+.ticket-main span { font: 400 .95cqw/1.25 var(--typed); color: var(--pencil); }
+.ticket-main .tk-mail { color: var(--ink); font-size: 1.02cqw; }
+.ticket-stub { writing-mode: vertical-rl; transform: rotate(180deg); padding: 8% .8cqw; font: 700 .9cqw/1 var(--mono); letter-spacing: .2em; color: var(--rust); text-align: center; }
+
+/* rubber stamps on the board */
 .stamp {
-  position: absolute; display: inline-grid; place-items: center; text-align: center; gap: .15em;
-  padding: .45em .8em; border: .16em solid var(--rust); border-radius: .3em; color: var(--rust);
-  font: 700 .74em/1.1 var(--type); letter-spacing: .14em; text-transform: uppercase;
-  transform: rotate(var(--r, -8deg)); opacity: .78; mix-blend-mode: multiply;
-  -webkit-mask-image: var(--grain); mask-image: var(--grain); -webkit-mask-size: 7em; mask-size: 7em;
+  position: absolute; z-index: 26; display: grid; place-items: center; gap: .15cqw; padding: .5cqw .9cqw; text-align: center;
+  border: .22cqw solid var(--rust); border-radius: .4cqw; color: var(--rust); font: 700 .85cqw/1.1 var(--mono); letter-spacing: .14em; text-transform: uppercase;
+  transform: rotate(var(--r)); opacity: .75; mix-blend-mode: multiply; pointer-events: none;
+  -webkit-mask-image: var(--grain); mask-image: var(--grain); -webkit-mask-size: 8cqw; mask-size: 8cqw;
 }
-.stamp b { font-size: 1.25em; letter-spacing: .08em; }
+.stamp b { font: 900 1.5cqw/1 var(--slab); letter-spacing: .08em; }
 
-/* photo prints */
-.stage { position: relative; height: 15.5em; margin: -.3em -.6em 1em; }
-.print {
-  position: absolute; width: var(--w, 52%); left: var(--x, 0); top: var(--y, 0);
-  background: #f6f1e4; padding: .5em .5em 1.7em; box-shadow: 0 .25em .7em rgba(30,20,5,.35), 0 0 0 1px rgba(0,0,0,.05);
-  transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(var(--r, 0deg)); cursor: grab; touch-action: none; user-select: none; z-index: 1;
+/* cutouts */
+.cut { position: absolute; z-index: var(--z, 20); left: var(--x); top: var(--y); width: var(--w); transform: rotate(var(--r, 0deg)); pointer-events: none;
+  filter: drop-shadow(.16cqw 0 0 #f7f2e6) drop-shadow(-.16cqw 0 0 #f7f2e6) drop-shadow(0 .16cqw 0 #f7f2e6) drop-shadow(0 -.16cqw 0 #f7f2e6) drop-shadow(.25cqw .5cqw .45cqw rgba(40,25,5,.4)); }
+.cut svg { display: block; width: 100%; height: auto; }
+.postage { position: absolute; z-index: 24; left: var(--x); top: var(--y); width: var(--w); transform: rotate(var(--r)); pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, transparent .45cqw, #f3ecdc .46cqw) -.5cqw -.5cqw / 1.3cqw 1.3cqw; padding: .65cqw; filter: drop-shadow(.2cqw .35cqw .35cqw rgba(40,25,5,.35)); }
+.postage .in { aspect-ratio: 4 / 5; display: grid; align-content: space-between; padding: 8%; color: #f3ecdc; font: 700 .8cqw/1.1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.postage .in b { font: 900 2.2cqw/1 var(--slab); }
+
+/* ---------- the flip overlay ---------- */
+.scrim { position: fixed; inset: 0; z-index: 90; background: rgba(24,18,10,.62); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+.flipper { position: fixed; z-index: 95; perspective: 1800px; }
+.flip-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
+.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; filter: drop-shadow(0 20px 40px rgba(0,0,0,.45)); }
+.face.front .tear { height: 100%; padding: 4% 4% 11%; display: grid; }
+.face.front .ph { aspect-ratio: auto; height: 100%; }
+.face.front .cap { font-size: 15px; }
+.face.back { transform: rotateY(180deg); }
+.back-paper {
+  max-height: 100%; height: auto; min-height: 100%; overflow: auto; background: var(--paper); padding: 30px 30px 26px; position: relative;
+  background-image: var(--grain), repeating-linear-gradient(transparent 0 27px, rgba(70,90,120,.12) 27px 28px);
+  background-position: 0 0, 0 74px; color: var(--ink);
 }
-.print.lift { cursor: grabbing; box-shadow: 0 1.1em 2em rgba(30,20,5,.45); z-index: 5; }
-.print .ph { position: relative; aspect-ratio: var(--ar, 4 / 3); overflow: hidden; background: #3c3a33; }
-.print img { display: block; width: 100%; height: 100%; object-fit: cover; filter: sepia(.32) saturate(.72) contrast(1.06) brightness(.93); pointer-events: none; }
-.print .ph::after { content: ""; position: absolute; inset: 0; background: var(--grain), radial-gradient(ellipse at center, transparent 55%, rgba(30,20,0,.35)); background-size: 9em, auto; mix-blend-mode: overlay; pointer-events: none; }
-.print figcaption { position: absolute; left: .55em; right: .55em; bottom: .35em; font: 400 .7em/1.2 var(--type); color: var(--pencil); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.print::before, .print::after { content: ""; position: absolute; width: 1.4em; height: 1.4em; background: #2b2a26; opacity: .85; }
-.print::before { top: -.35em; left: -.35em; clip-path: polygon(0 0, 100% 0, 0 100%); }
-.print::after { bottom: -.35em; right: -.35em; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
-
-/* specimen label */
-.specimen { border: 1px solid rgba(42,37,30,.45); padding: .55em .7em .5em; background: rgba(255,250,235,.45); position: relative; }
-.specimen + .specimen { margin-top: .55em; }
-.specimen .no { position: absolute; top: .5em; right: .65em; font: 400 .7em/1 var(--type); color: var(--pencil); }
-.specimen h3 { font-size: 1.12em; padding-right: 3em; }
-.specimen p { font-size: .83em; line-height: 1.38; margin: 0 0 .3em; }
-.specimen .meas { font: 400 .72em/1.3 var(--type); color: var(--rust); letter-spacing: .02em; }
-
-/* data sheet */
-table.data { width: 100%; border-collapse: collapse; font-size: .9em; margin-top: .4em; }
-table.data th { font: 700 .72em/1 var(--type); letter-spacing: .12em; text-transform: uppercase; color: var(--pencil); text-align: left; padding: 0 0 .5em; border-bottom: 1px solid rgba(42,37,30,.5); }
-table.data td { padding: .5em 0; border-bottom: 1px dashed rgba(42,37,30,.25); vertical-align: top; }
-table.data td.v { font: 800 1.45em/1 var(--slab); white-space: nowrap; padding-right: .6em; font-variant-numeric: tabular-nums; }
-table.data td.n { font-size: .9em; line-height: 1.35; }
-
-/* covers */
-.page.cover { color: var(--brass-hi); background: var(--leather); }
-.cover .page-inner {
-  display: grid; align-content: center; justify-items: center; text-align: center; padding: 3em;
-  background-image: var(--grain), radial-gradient(ellipse at 40% 30%, rgba(255,255,255,.07), transparent 60%), linear-gradient(160deg, var(--leather), var(--leather-dk));
-  background-blend-mode: overlay, normal, normal;
+.back-paper .eyebrow { font: 700 12px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--rust); margin: 0 0 12px; display: flex; justify-content: space-between; gap: 10px; }
+.back-paper h2 { font: 900 clamp(26px, 4.4vw, 36px)/1 var(--slab); margin: 0 0 8px; padding-right: 92px; letter-spacing: .01em; text-wrap: balance; }
+.back-paper .meta { font: 400 14px/1.4 var(--typed); color: var(--pencil); margin: 0 0 16px; }
+.back-paper ul { margin: 0 0 18px; padding: 0; list-style: none; display: grid; gap: 9px; font-size: 15.5px; line-height: 1.45; }
+.back-paper li { padding-left: 20px; position: relative; }
+.back-paper li::before { content: "—"; position: absolute; left: 0; color: var(--rust); }
+.back-paper p { margin: 0 0 12px; font-size: 15.5px; }
+.measure { display: flex; gap: 14px; align-items: baseline; border-top: 1px solid rgba(42,36,28,.35); border-bottom: 1px dashed rgba(42,36,28,.3); padding: 10px 0; margin: 0 0 16px; }
+.measure b { font: 900 34px/1 var(--slab); color: var(--rust); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.measure span { font: 400 14px/1.35 var(--typed); color: var(--ink); }
+.links { display: flex; flex-wrap: wrap; gap: 8px; }
+.links a, .links button {
+  all: unset; cursor: pointer; font: 700 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink);
+  border: 1.5px solid var(--ink); padding: 9px 12px; border-radius: 3px;
 }
-.cover .page-inner::after { box-shadow: inset 0 0 0 1.2em transparent, inset 0 0 0 calc(1.2em + 1px) rgba(185,151,90,.55), inset 0 0 5em rgba(0,0,0,.45); }
-.cover .emboss { font: 800 3.4em/0.95 var(--slab); letter-spacing: .06em; text-transform: uppercase; color: var(--brass); text-shadow: 0 1px 0 rgba(255,230,170,.35), 0 -1px 0 rgba(0,0,0,.6); margin: .5em 0 .3em; }
-.cover .name { font: 600 1.45em/1.15 var(--slab); letter-spacing: .1em; text-transform: uppercase; color: var(--brass-hi); }
-.cover .sub { font: 400 .82em/1.6 var(--type); letter-spacing: .18em; text-transform: uppercase; color: rgba(224,196,138,.75); margin-top: 1.1em; }
-.cover .rule { width: 40%; height: 1px; background: rgba(185,151,90,.6); margin: 1.3em 0; }
-.cover svg { width: 5.4em; height: 5.4em; }
-.cover .open { margin-top: 2.2em; font: italic 400 .8em/1 var(--type); color: rgba(224,196,138,.6); }
+.links a:hover, .links button:hover { background: var(--ink); color: var(--paper); }
+.links a:focus-visible, .links button:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
+.back-paper .bstamp { position: absolute; right: 22px; top: 54px; display: grid; place-items: center; padding: 6px 10px; border: 2.5px solid var(--rust); border-radius: 5px; color: var(--rust);
+  font: 700 11px/1.15 var(--mono); letter-spacing: .14em; text-transform: uppercase; transform: rotate(8deg); opacity: .7; mix-blend-mode: multiply;
+  -webkit-mask-image: var(--grain); mask-image: var(--grain); -webkit-mask-size: 90px; mask-size: 90px; pointer-events: none; }
+.back-paper .bstamp b { font: 900 18px/1 var(--slab); }
+.mail { font: 700 17px/1.3 var(--mono); user-select: all; word-break: break-all; display: block; margin: 4px 0 14px; }
+.ctrlbar { position: fixed; z-index: 96; left: 50%; bottom: max(18px, env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: flex; gap: 10px; }
+.ctrlbar button { font: 700 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #f3ead6; background: rgba(30,24,16,.75); border: 1px solid rgba(243,234,214,.35); border-radius: 999px; padding: 11px 16px; cursor: pointer; }
+.ctrlbar button:hover { border-color: #f3ead6; }
 
-/* endpaper */
-.endpaper .page-inner {
-  background-color: #d9cfb3;
-  background-image: var(--grain),
-    repeating-radial-gradient(ellipse 120% 80% at 28% 38%, transparent 0 1.3em, rgba(120,95,50,.32) 1.3em calc(1.3em + 1px)),
-    repeating-radial-gradient(ellipse 90% 110% at 82% 80%, transparent 0 1.1em, rgba(120,95,50,.26) 1.1em calc(1.1em + 1px));
+/* ---------- read as a list ---------- */
+.list { max-width: 760px; margin: 0 auto; padding: 56px max(16px, env(safe-area-inset-right, 0px)) 30px max(16px, env(safe-area-inset-left, 0px)); color: #eadfc8; }
+.list > h2 { font: 900 30px/1.1 var(--slab); letter-spacing: .04em; margin: 0 0 6px; }
+.list > p { font: 400 14px/1.5 var(--typed); color: #bfae8c; margin: 0 0 26px; }
+.list article { border-top: 1px solid rgba(234,223,200,.18); padding: 22px 0; }
+.list h3 { font: 700 22px/1.2 var(--slab); margin: 0 0 4px; }
+.list .meta { font: 400 13.5px/1.4 var(--typed); color: #bfae8c; margin: 0 0 10px; }
+.list ul { margin: 0 0 8px; padding-left: 20px; display: grid; gap: 6px; }
+.list p { margin: 0 0 8px; }
+.list a { text-decoration-color: rgba(234,223,200,.4); text-underline-offset: 3px; }
+footer { max-width: 1320px; margin: 0 auto; padding: 22px max(16px, env(safe-area-inset-right, 0px)) 34px max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font: 400 12px/1.5 var(--mono); color: #9c8c6e; border-top: 1px solid rgba(234,223,200,.12); }
+
+/* ---------- small screens: a scrolling collage ---------- */
+@media (max-width: 820px) {
+  .board { aspect-ratio: auto; container-type: inline-size; padding: 46cqw 4cqw 10cqw; display: grid; grid-template-columns: 1fr 1fr; gap: 6cqw 5cqw; align-items: start; }
+  .kraft { inset: 3% 3% 2% 3%; }
+  .title { left: 50%; top: 5cqw; width: 90%; padding: 2.6cqw 4cqw; }
+  .title h1 { white-space: normal; }
+  .title h1 { font-size: 6.4cqw; }
+  .title p { font-size: 2.6cqw; margin-top: 1cqw; }
+  .card { position: relative; left: auto; top: auto; width: auto; }
+  .card.wide { grid-column: 1 / -1; width: 78%; justify-self: center; }
+  .cap { font-size: 2.9cqw; }
+  .card.wide .cap { font-size: 3.4cqw; }
+  .ticket-main b { font-size: 5cqw; } .ticket-main span { font-size: 2.4cqw; } .ticket-main .tk-mail { font-size: 2.6cqw; } .ticket-stub { font-size: 2.2cqw; }
+  .pin { width: 3.4cqw; height: 3.4cqw; margin-left: -1.7cqw; }
+  .cut, .postage, .stamp, .map-label, .deco { display: none; }
+  .cut.keep-m { display: block; position: absolute; }
+  .cut.balloon { left: 8cqw; top: 23cqw; width: 13cqw; }
+  .cut.plane { left: auto; right: 8cqw; top: 26cqw; width: 24cqw; }
+  .card:hover { transform: rotate(var(--r)); }
 }
-.bookplate { background: var(--paper); border: 1px solid rgba(42,37,30,.5); outline: .3em double rgba(42,37,30,.35); outline-offset: .25em; padding: 1.3em 1.4em 1.1em; margin: 1.6em .4em 0; position: relative; }
-.bookplate .eyebrow { color: var(--pencil); }
-.bookplate .who { font: 800 1.7em/1.05 var(--slab); margin-bottom: .45em; }
-.contents { list-style: none; margin: .8em 0 0; padding: 0; display: grid; gap: .1em; font-size: .92em; }
-.contents button { all: unset; cursor: pointer; display: flex; gap: .6em; align-items: baseline; width: 100%; padding: .22em 0; }
-.contents button:hover span:first-child, .contents button:focus-visible span:first-child { color: var(--rust); text-decoration: underline; }
-.contents .dots { flex: 1; border-bottom: 1px dotted rgba(42,37,30,.5); transform: translateY(-.25em); }
-.contents .pg { font: 400 .85em/1 var(--type); color: var(--pencil); }
-
-.copy { all: unset; cursor: pointer; font: 700 .72em/1 var(--type); letter-spacing: .12em; text-transform: uppercase; color: var(--rust); border: 1px solid currentColor; padding: .45em .7em; border-radius: .25em; }
-.linkrow { display: grid; gap: .45em; margin-top: 1em; font: 400 .9em/1.3 var(--type); }
-.linkrow a { text-decoration-color: rgba(156,74,38,.5); text-underline-offset: .2em; }
-.linkrow a:hover { color: var(--rust); }
-
-/* lightbox */
-.lightbox { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: rgba(12,14,12,.9); padding: max(24px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
-.lightbox figure { margin: 0; background: #f6f1e4; padding: 12px 12px 44px; max-width: min(92vw, 1100px); position: relative; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
-.lightbox img { display: block; max-width: 100%; max-height: 76vh; filter: sepia(.32) saturate(.72) contrast(1.06) brightness(.93); }
-.lightbox figcaption { position: absolute; left: 14px; right: 14px; bottom: 13px; font: 400 14px/1.2 var(--type); color: var(--pencil); }
-.lightbox .x { position: absolute; top: max(16px, env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); font: 700 13px/1 var(--type); color: var(--paper); background: none; border: 1px solid rgba(235,226,205,.35); border-radius: 999px; padding: 10px 14px; cursor: pointer; letter-spacing: .08em; }
-
-/* ---------- small screens: a stack of pages ---------- */
-body.stacked .controls, body.stacked .hint .book-only { display: none; }
-body.stacked #book { display: grid; gap: 22px; max-width: 560px; }
-body.stacked .page { aspect-ratio: auto; box-shadow: 0 14px 40px rgba(0,0,0,.45); border-radius: 2px; }
-body.stacked .page-inner { font-size: 3.6cqw; height: auto; padding-bottom: 3em; }
-body.stacked .print { touch-action: auto; cursor: pointer; }
-body.stacked .cover .page-inner { min-height: 125cqw; }
-@media (max-width: 420px) { body.stacked .page-inner { font-size: 4.1cqw; } }
-
-@media (prefers-reduced-motion: reduce) { .print { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover, .card:focus-visible { transform: rotate(var(--r)); } }
 </style>
 </head>
 <body>
-  <header class="top">
-    <span>N. Madthila · field notes · Pittsburgh, PA</span>
-    <nav aria-label="Jump to">
-      <a href="#" data-goto="2">About</a>
-      <a href="#" data-goto="4">Work</a>
-      <a href="#" data-goto="8">Projects</a>
-      <a href="#" data-goto="10">Contact</a>
+  <header class="topbar">
+    <span>N. Madthila · AI/ML engineer · Pittsburgh, PA</span>
+    <nav aria-label="Links">
+      <a href="#list">Read as a list</a>
+      <a href="https://github.com/nishsm" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/nishanthsm01/" target="_blank" rel="noopener">LinkedIn</a>
     </nav>
   </header>
 
-  <main class="desk">
-    <div id="book">
+  <main class="board-wrap">
+    <div class="board" id="board">
+      <div class="kraft" aria-hidden="true"></div>
+      <span class="map-label" style="left:2%;top:92%" aria-hidden="true">Allegheny River</span>
+      <span class="map-label" style="left:76%;top:4%" aria-hidden="true">Monongahela</span>
 
-      <!-- 0 · front cover -->
-      <div class="page cover" data-density="hard">
-        <div class="page-inner">
-          <svg viewBox="0 0 100 100" aria-hidden="true">
-            <g fill="none" stroke="#b9975a" stroke-width="1.2"><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="33" stroke-dasharray="1 3.2"/></g>
-            <path d="M50 8 L56 50 L50 92 L44 50 Z" fill="#b9975a"/><path d="M8 50 L50 45 L92 50 L50 55 Z" fill="#8e7444"/>
-            <circle cx="50" cy="50" r="3" fill="#1d2a20" stroke="#e0c48a"/>
-            <text x="50" y="6" text-anchor="middle" font-size="6" fill="#e0c48a" font-family="Courier Prime, monospace">N</text>
-          </svg>
-          <div class="emboss">Field<br>Notes</div>
-          <div class="rule"></div>
-          <div class="name">Nishanth Madthila</div>
-          <div class="sub">AI/ML Engineer · Vol. 2026<br>40.4406° N, 79.9959° W</div>
-          <div class="open">open the cover ›</div>
-        </div>
+      <div class="title">
+        <h1>Nishanth Madthila</h1>
+        <p>field notes · AI/ML engineer · Bangalore to Pittsburgh</p>
       </div>
 
-      <!-- 1 · endpaper / contents -->
-      <div class="page endpaper">
-        <div class="page-inner">
-          <div class="bookplate">
-            <p class="eyebrow">This notebook belongs to</p>
-            <div class="who">Nishanth Madthila</div>
-            <p class="small" style="margin:0">AI/ML engineer. CMU, Information Systems Management, Dec 2026. If found, write to <b>nishanthsm01@gmail.com</b>.</p>
-            <ol class="contents">
-              <li><button type="button" data-goto="2"><span>The observer</span><span class="dots"></span><span class="pg">p. 2</span></button></li>
-              <li><button type="button" data-goto="3"><span>Little things, roll 01</span><span class="dots"></span><span class="pg">p. 3</span></button></li>
-              <li><button type="button" data-goto="4"><span>Field log: BNY</span><span class="dots"></span><span class="pg">p. 4</span></button></li>
-              <li><button type="button" data-goto="5"><span>Measurements</span><span class="dots"></span><span class="pg">p. 5</span></button></li>
-              <li><button type="button" data-goto="6"><span>Field log: Perflections.ai</span><span class="dots"></span><span class="pg">p. 6</span></button></li>
-              <li><button type="button" data-goto="7"><span>Field log: Slamdunk.AI</span><span class="dots"></span><span class="pg">p. 7</span></button></li>
-              <li><button type="button" data-goto="8"><span>Specimens</span><span class="dots"></span><span class="pg">p. 8</span></button></li>
-              <li><button type="button" data-goto="9"><span>Little things, roll 02</span><span class="dots"></span><span class="pg">p. 9</span></button></li>
-              <li><button type="button" data-goto="10"><span>Send word</span><span class="dots"></span><span class="pg">p. 10</span></button></li>
-            </ol>
-          </div>
-          <span class="folio">i</span>
-        </div>
+      <!-- decorative prints, not clickable -->
+      <div class="card deco" style="--x:46%;--y:66%;--w:13%;--r:-7deg;--z:2;cursor:default;pointer-events:none" aria-hidden="true">
+        <div class="tear"><div class="ph" style="--ar:3/4"><img src="https://images.unsplash.com/photo-1534269222346-5a896154c41d?w=400&q=60&auto=format&fit=crop" alt=""></div></div>
+      </div>
+      <div class="card deco" style="--x:85.5%;--y:40%;--w:12%;--r:5deg;--z:2;cursor:default;pointer-events:none" aria-hidden="true">
+        <div class="tear"><div class="ph" style="--ar:3/4"><img src="https://images.unsplash.com/photo-1742899278125-9515f96bbbfd?w=400&q=60&auto=format&fit=crop" alt=""></div></div>
       </div>
 
-      <!-- 2 · the observer -->
-      <div class="page">
-        <div class="page-inner">
-          <p class="eyebrow">p. 2 · The observer</p>
-          <div class="stage" style="height:16em">
-            <figure class="print" style="--x:6%;--y:2%;--w:58%;--r:-3deg;--ar:4/5" data-full="https://images.unsplash.com/photo-1544039161-b0c20826c6f6?w=1600&q=80&auto=format" data-cap="Portrait to come. Until then, the path.">
-              <div class="ph"><img src="https://images.unsplash.com/photo-1544039161-b0c20826c6f6?w=700&q=70&auto=format&fit=crop" alt="Dirt path through a foggy forest (placeholder for a portrait)" loading="lazy"></div>
-              <figcaption>self-portrait, pending</figcaption>
-            </figure>
-            <div class="stamp" style="right:4%;top:24%;--r:9deg">Pittsburgh<b>2026</b>Pennsylvania</div>
-          </div>
-          <h2>Nishanth Madthila</h2>
-          <p>I build ML systems that hold up outside the notebook: agent platforms that operations teams adopt, vision models that survive real video, and tools for reasoning about LLM inference.</p>
-          <p class="small">Finishing my MS at Carnegie Mellon as a Cooper Fellow. Before that, CS at PES University, Bangalore. I want to be the engineer who sits with the customer and ships.</p>
-          <p class="pencil">Off hours: film photography, F1, chess, cooking.</p>
-          <span class="folio">2</span>
-        </div>
+      <!-- cutouts -->
+      <div class="cut balloon keep-m" style="--x:1.2%;--y:2%;--w:10.5%;--r:-4deg" aria-hidden="true">
+        <svg viewBox="0 0 120 170">
+          <defs><pattern id="dots" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r=".7" fill="#000" opacity=".18"/></pattern></defs>
+          <path d="M60 4 C 22 4 6 34 10 62 C 14 88 40 104 50 124 L70 124 C 80 104 106 88 110 62 C 114 34 98 4 60 4 Z" fill="#a8452a"/>
+          <path d="M60 4 C 44 6 34 34 36 62 C 38 88 48 106 52 124 L68 124 C 72 106 82 88 84 62 C 86 34 76 6 60 4 Z" fill="#e3c27a"/>
+          <path d="M60 4 C 54 8 52 34 53 62 C 54 90 57 108 58 124 L62 124 C 63 108 66 90 67 62 C 68 34 66 8 60 4 Z" fill="#a8452a"/>
+          <path d="M14 70 C 40 80 80 80 106 70 L104 78 C 80 88 40 88 16 78 Z" fill="#2f3f2e"/>
+          <path d="M60 4 C 22 4 6 34 10 62 C 14 88 40 104 50 124 L70 124 C 80 104 106 88 110 62 C 114 34 98 4 60 4 Z" fill="url(#dots)"/>
+          <g stroke="#3b2a18" stroke-width="1.2"><line x1="50" y1="124" x2="49" y2="146"/><line x1="70" y1="124" x2="71" y2="146"/><line x1="57" y1="124" x2="56" y2="146"/><line x1="63" y1="124" x2="64" y2="146"/></g>
+          <rect x="45" y="144" width="30" height="20" rx="2" fill="#7a5530"/>
+          <g stroke="#5a3d20" stroke-width="1"><line x1="45" y1="150" x2="75" y2="150"/><line x1="45" y1="156" x2="75" y2="156"/><line x1="52" y1="144" x2="52" y2="164"/><line x1="60" y1="144" x2="60" y2="164"/><line x1="68" y1="144" x2="68" y2="164"/></g>
+        </svg>
       </div>
 
-      <!-- 3 · roll 01 -->
-      <div class="page">
-        <div class="page-inner">
-          <p class="eyebrow">p. 3 · Little things, roll 01</p>
-          <div class="stage" style="height:30em;margin-top:.2em">
-            <figure class="print" style="--x:0%;--y:0%;--w:50%;--r:-4deg" data-full="https://images.unsplash.com/photo-1592515058976-54f480329a72?w=1600&q=80&auto=format" data-cap="frame 03 · dew on grass, early">
-              <div class="ph"><img src="https://images.unsplash.com/photo-1592515058976-54f480329a72?w=600&q=70&auto=format&fit=crop" alt="Water droplets on grass blades" loading="lazy"></div>
-              <figcaption>03 · dew, early</figcaption>
-            </figure>
-            <figure class="print" style="--x:48%;--y:4%;--w:50%;--r:3deg" data-full="https://images.unsplash.com/photo-1580873317794-1e8b7816efbb?w=1600&q=80&auto=format" data-cap="frame 07 · moss, at eye level">
-              <div class="ph"><img src="https://images.unsplash.com/photo-1580873317794-1e8b7816efbb?w=600&q=70&auto=format&fit=crop" alt="Close-up of green moss with shallow focus" loading="lazy"></div>
-              <figcaption>07 · moss, eye level</figcaption>
-            </figure>
-            <figure class="print" style="--x:4%;--y:48%;--w:48%;--r:2deg" data-full="https://images.unsplash.com/photo-1635751698741-c8e35efccbd7?w=1600&q=80&auto=format" data-cap="frame 11 · a pine the size of a thumb">
-              <div class="ph"><img src="https://images.unsplash.com/photo-1635751698741-c8e35efccbd7?w=600&q=70&auto=format&fit=crop" alt="Tiny pine seedling on a mossy rock" loading="lazy"></div>
-              <figcaption>11 · pine, thumb-sized</figcaption>
-            </figure>
-            <figure class="print" style="--x:50%;--y:52%;--w:48%;--r:-2.5deg" data-full="https://images.unsplash.com/photo-1742899278125-9515f96bbbfd?w=1600&q=80&auto=format" data-cap="frame 14 · bark and moss">
-              <div class="ph"><img src="https://images.unsplash.com/photo-1742899278125-9515f96bbbfd?w=600&q=70&auto=format&fit=crop" alt="Tree bark with moss" loading="lazy"></div>
-              <figcaption>14 · bark</figcaption>
-            </figure>
-          </div>
-          <p class="pencil">Placeholder frames (Unsplash) until my own film goes here. Pick one up and move it, or tap to look closer.</p>
-          <span class="folio">3</span>
-        </div>
+      <div class="cut plane keep-m" style="--x:83%;--y:3%;--w:15.5%;--r:6deg" aria-hidden="true">
+        <svg viewBox="0 0 220 120">
+          <rect x="62" y="18" width="128" height="9" rx="4" fill="#556b4a"/>
+          <rect x="58" y="70" width="136" height="10" rx="4" fill="#4a5e40"/>
+          <g stroke="#2b2a22" stroke-width="2.4"><line x1="86" y1="27" x2="90" y2="70"/><line x1="166" y1="27" x2="162" y2="70"/><line x1="86" y1="27" x2="162" y2="70" stroke-width="1"/><line x1="166" y1="27" x2="90" y2="70" stroke-width="1"/></g>
+          <path d="M40 52 C 60 40 150 40 176 48 L200 46 L206 56 L176 62 C 150 68 64 66 40 60 Z" fill="#7b8a5f"/>
+          <path d="M176 48 L202 30 L210 32 L204 52 Z" fill="#556b4a"/>
+          <path d="M40 52 L28 50 L26 62 L40 60 Z" fill="#8e5a33"/>
+          <ellipse cx="22" cy="56" rx="3" ry="22" fill="#3b2a18"/>
+          <circle cx="114" cy="48" r="7" fill="#2b2a22"/>
+          <g fill="#2b2a22"><circle cx="96" cy="100" r="9"/><circle cx="140" cy="100" r="9"/></g>
+          <g fill="#c9b78f"><circle cx="96" cy="100" r="3.5"/><circle cx="140" cy="100" r="3.5"/></g>
+          <g stroke="#2b2a22" stroke-width="2.2"><line x1="104" y1="64" x2="96" y2="96"/><line x1="128" y1="64" x2="140" y2="96"/></g>
+          <circle cx="150" cy="54" r="6" fill="#e3c27a" stroke="#a8452a" stroke-width="2"/>
+          <rect x="40" y="40" width="168" height="60" fill="url(#dots)" opacity=".7"/>
+        </svg>
       </div>
 
-      <!-- 4 · BNY -->
-      <div class="page ruled">
-        <div class="page-inner">
-          <p class="eyebrow">p. 4 · Field log · May to Aug 2026</p>
-          <div class="stage" style="height:13em">
-            <figure class="print" style="--x:2%;--y:2%;--w:54%;--r:-2deg" data-full="https://images.unsplash.com/photo-1436476426006-344b576bd5d4?w=1600&q=80&auto=format" data-cap="a bridge in the trees. Pittsburgh has a few.">
-              <div class="ph"><img src="https://images.unsplash.com/photo-1436476426006-344b576bd5d4?w=700&q=70&auto=format&fit=crop" alt="Black metal bridge near trees" loading="lazy"></div>
-              <figcaption>bridges, everywhere</figcaption>
-            </figure>
-            <div class="stamp" style="right:6%;top:18%;--r:-7deg">AI Hub<b>BNY</b>Pittsburgh</div>
-          </div>
-          <h2>BNY (Bank of New York Mellon)</h2>
-          <p class="pencil" style="margin-bottom:.5em">AI/ML Engineer Intern, AI Hub</p>
-          <ul class="log">
-            <li>Turned a one-off document pipeline into a config-driven agent platform: one orchestrator, swappable agent skills, 6 production use cases.</li>
-            <li>Built the self-service agent builder (React, TypeScript) with tools behind MCP so every agent shares auth, least-privilege scoping and tracing.</li>
-            <li>Revived a written-off automation by reverse-engineering a remote app's auth flow and replaying it, unblocking 4 operations teams.</li>
-          </ul>
-          <span class="folio">4</span>
-        </div>
+      <div class="cut" style="--x:1.5%;--y:80%;--w:15%;--r:-3deg;--z:28" aria-hidden="true">
+        <svg viewBox="0 0 200 110">
+          <path d="M14 30 C 14 16 22 10 36 10 L150 10 C 170 10 186 26 190 46 L194 76 C 195 84 190 88 182 88 L20 88 C 12 88 8 82 8 74 Z" fill="#a8452a"/>
+          <path d="M8 56 L193 56 L194 76 C 195 84 190 88 182 88 L20 88 C 12 88 8 82 8 74 Z" fill="#efe3c6"/>
+          <g fill="#38443a"><rect x="24" y="18" width="28" height="22" rx="3"/><rect x="58" y="18" width="28" height="22" rx="3"/><rect x="92" y="18" width="28" height="22" rx="3"/><rect x="126" y="18" width="24" height="22" rx="3"/></g>
+          <path d="M156 18 L170 18 C 178 22 182 30 184 40 L156 40 Z" fill="#38443a"/>
+          <rect x="176" y="62" width="14" height="6" rx="2" fill="#2b2a22"/>
+          <circle cx="180" cy="52" r="5" fill="#f2e7c9" stroke="#2b2a22" stroke-width="2"/>
+          <g fill="#2b2a22"><circle cx="46" cy="90" r="15"/><circle cx="156" cy="90" r="15"/></g>
+          <g fill="#bdb6a2"><circle cx="46" cy="90" r="6"/><circle cx="156" cy="90" r="6"/></g>
+          <rect x="8" y="10" width="186" height="80" fill="url(#dots)"/>
+        </svg>
       </div>
 
-      <!-- 5 · measurements -->
-      <div class="page">
-        <div class="page-inner">
-          <p class="eyebrow">p. 5 · Measurements</p>
-          <h2>What the summer added up to</h2>
-          <table class="data">
-            <thead><tr><th scope="col">Reading</th><th scope="col">Note</th></tr></thead>
-            <tbody>
-              <tr><td class="v">155K</td><td class="n">analyst hours a year saved, an estimated $7.8M</td></tr>
-              <tr><td class="v">25+</td><td class="n">agents built or configured on the platform</td></tr>
-              <tr><td class="v">200+</td><td class="n">people using the agent builder</td></tr>
-              <tr><td class="v">7×</td><td class="n">faster onboarding, a week down to a day</td></tr>
-              <tr><td class="v">27/33</td><td class="n">deployments running on the shared pipeline</td></tr>
-              <tr><td class="v">120</td><td class="n">lines of 16,300 written by hand. The rest with AI coding tools.</td></tr>
-            </tbody>
-          </table>
-          <p class="pencil" style="margin-top:1em">Lesson logged: the difference between solving a problem and building a platform is whether your work makes the next one easier.</p>
-          <div class="stamp" style="right:7%;bottom:9%;--r:6deg">Measured<b>Summer</b>2026</div>
-          <span class="folio">5</span>
-        </div>
+      <div class="cut" style="--x:63%;--y:84%;--w:9%;--r:8deg;--z:27" aria-hidden="true">
+        <svg viewBox="0 0 120 80">
+          <rect x="6" y="16" width="108" height="56" rx="6" fill="#2b2a26"/>
+          <rect x="6" y="16" width="108" height="16" rx="6" fill="#bfb8a6"/>
+          <rect x="18" y="8" width="22" height="10" rx="2" fill="#bfb8a6"/>
+          <rect x="84" y="10" width="14" height="8" rx="2" fill="#2b2a26"/>
+          <circle cx="62" cy="48" r="22" fill="#bfb8a6"/><circle cx="62" cy="48" r="16" fill="#1b1a17"/><circle cx="62" cy="48" r="9" fill="#33414a"/><circle cx="58" cy="44" r="3" fill="#cfd8d8" opacity=".8"/>
+          <rect x="92" y="22" width="16" height="8" rx="1.5" fill="#cfd8d8"/>
+          <rect x="6" y="16" width="108" height="56" fill="url(#dots)"/>
+        </svg>
       </div>
 
-      <!-- 6 · Perflections -->
-      <div class="page ruled">
-        <div class="page-inner">
-          <p class="eyebrow">p. 6 · Field log · Sep 2025 to Feb 2026</p>
-          <div class="stage" style="height:13.5em">
-            <figure class="print" style="--x:36%;--y:3%;--w:56%;--r:2.5deg" data-full="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1600&q=80&auto=format" data-cap="light through the trees, the kind a detector hates">
-              <div class="ph"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=700&q=70&auto=format&fit=crop" alt="Sun rays through a forest" loading="lazy"></div>
-              <figcaption>hard light, hard frames</figcaption>
-            </figure>
-            <div class="stamp" style="left:3%;top:30%;--r:-10deg">Golf CV<b>0.935</b>mAP, untrusted</div>
-          </div>
-          <h2>Perflections.ai</h2>
-          <p class="pencil" style="margin-bottom:.5em">Founding AI/ML Engineer, part-time</p>
-          <ul class="log">
-            <li>A golf ball detector scored 0.935 mAP@50-95 and found the ball in under 10% of real swing frames. Traced it to augmentation that never shows up in deployment, then fixed training and small-object inference.</li>
-            <li>Built tracking where YOLO detections seed SAM 2 mask propagation and re-detection recovers lost tracks, on an 8 GB laptop GPU.</li>
-          </ul>
-          <span class="folio">6</span>
-        </div>
+      <div class="cut" style="--x:91%;--y:80%;--w:7.4%;--r:-10deg;--z:27" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#a8874a"/><circle cx="50" cy="50" r="39" fill="#efe3c6"/>
+          <g stroke="#2b2a22" stroke-width="1.2" opacity=".6"><line x1="50" y1="14" x2="50" y2="20"/><line x1="50" y1="80" x2="50" y2="86"/><line x1="14" y1="50" x2="20" y2="50"/><line x1="80" y1="50" x2="86" y2="50"/></g>
+          <path d="M50 16 L57 50 L50 84 L43 50 Z" fill="#a8452a"/><path d="M50 50 L57 50 L50 84 L43 50 Z" fill="#2b2a22"/>
+          <circle cx="50" cy="50" r="4" fill="#a8874a"/>
+          <text x="50" y="30" text-anchor="middle" font-size="9" font-family="Courier Prime, monospace" fill="#2b2a22">N</text>
+          <circle cx="50" cy="50" r="46" fill="url(#dots)"/>
+        </svg>
       </div>
 
-      <!-- 7 · Slamdunk -->
-      <div class="page ruled">
-        <div class="page-inner">
-          <p class="eyebrow">p. 7 · Field log · 2022 to 2025</p>
-          <div class="stage" style="height:13em">
-            <figure class="print" style="--x:3%;--y:4%;--w:54%;--r:-2.5deg" data-full="https://images.unsplash.com/photo-1576003350554-b10a4f9949f3?w=1600&q=80&auto=format" data-cap="fallen trees, still growing things">
-              <div class="ph"><img src="https://images.unsplash.com/photo-1576003350554-b10a4f9949f3?w=700&q=70&auto=format&fit=crop" alt="Fallen trees covered in moss" loading="lazy"></div>
-              <figcaption>start small, keep growing</figcaption>
-            </figure>
-            <div class="stamp" style="right:5%;top:22%;--r:8deg">Bangalore<b>IN</b>Intern to lead</div>
-          </div>
-          <h2>Slamdunk.AI</h2>
-          <p class="pencil" style="margin-bottom:.5em">Founding AI/ML Engineer · led the recommendation team</p>
-          <ul class="log">
-            <li>Built the coaching recommender from scratch, then rebuilt it after sitting with tennis coaches. RAG over FAISS with LoRA-tuned models; feedback went from 3 minutes to under 15 seconds.</li>
-            <li>Real-time athlete tracking with YOLOv8 and MediaPipe at 96% detection accuracy; ONNX cut the model 40%, serving changes cut cloud cost 70%.</li>
-          </ul>
-          <span class="folio">7</span>
-        </div>
-      </div>
+      <div class="postage" style="--x:19.5%;--y:4%;--w:6.2%;--r:-8deg" aria-hidden="true"><div class="in" style="background:#3b4e39"><span>India</span><b>22</b><span>Bangalore</span></div></div>
+      <div class="postage" style="--x:73%;--y:4.5%;--w:6.2%;--r:7deg" aria-hidden="true"><div class="in" style="background:#9b4826"><span>USA</span><b>26</b><span>Pittsburgh</span></div></div>
 
-      <!-- 8 · specimens -->
-      <div class="page">
-        <div class="page-inner">
-          <p class="eyebrow">p. 8 · Specimens</p>
-          <h2 style="font-size:1.9em">Things I built to find out</h2>
-          <div class="specimen"><span class="no">No. 01</span><h3><a href="https://github.com/nishsm" target="_blank" rel="noopener">SwingTrace</a></h3><p>Golf club tracking from swing video. YOLO11m finds shaft, head and hands; swing-path reconstruction recovers missed heads from shaft geometry.</p><span class="meas">Club tracked in 93.4% of 3,018 unseen frames</span></div>
-          <div class="specimen"><span class="no">No. 02</span><h3><a href="https://github.com/nishsm" target="_blank" rel="noopener">llm-roofline-agent</a></h3><p>A roofline model of LLM inference: prefill and decode intensity against a GPU's compute and bandwidth ceilings, validated on a T4.</p><span class="meas">T4 ridge ≈ 203 FLOP/byte; batch-1 decode ≈ 1</span></div>
-          <div class="specimen"><span class="no">No. 03</span><h3>Excessive Agency research</h3><p>Extending LLM Guard with graph-based access control for multi-step agents, benchmarked on AgentDojo. CMU independent study.</p><span class="meas">In progress · prompt injection, exfiltration</span></div>
-          <div class="specimen"><span class="no">No. 04</span><h3><a href="https://doi.org/10.1109/ICACITE57410.2023.10182598" target="_blank" rel="noopener">BBBNet · IEEE 2023</a></h3><p>Graph convolutional networks for blood-brain barrier permeability, built with a pharma analyst.</p><span class="meas">91% accuracy · 96.7% AUROC</span></div>
-          <div class="specimen"><span class="no">No. 05</span><h3><a href="https://github.com/nishsm" target="_blank" rel="noopener">Autonomous SOC Agent</a></h3><p>LangGraph observer and planner: Isolation Forest flags flows, a local LLM drafts recovery plans from retrieved playbooks.</p></div>
-          <span class="folio">8</span>
-        </div>
-      </div>
+      <div class="stamp" style="left:20%;top:85%;--r:-9deg" aria-hidden="true">Posted<b>PIT</b>2026</div>
 
-      <!-- 9 · roll 02 -->
-      <div class="page">
-        <div class="page-inner">
-          <p class="eyebrow">p. 9 · Little things, roll 02</p>
-          <div class="stage" style="height:30em;margin-top:.2em">
-            <figure class="print" style="--x:2%;--y:2%;--w:58%;--r:2deg" data-full="https://images.unsplash.com/photo-1509101758186-479a713d3687?w=1600&q=80&auto=format" data-cap="frame 22 · pines going into the fog">
-              <div class="ph"><img src="https://images.unsplash.com/photo-1509101758186-479a713d3687?w=700&q=70&auto=format&fit=crop" alt="Pine trees in fog" loading="lazy"></div>
-              <figcaption>22 · pines, fog</figcaption>
-            </figure>
-            <figure class="print" style="--x:52%;--y:12%;--w:46%;--r:-4deg;--ar:4/5" data-full="https://images.unsplash.com/photo-1623048233970-0460e098f761?w=1600&q=80&auto=format" data-cap="frame 25 · moss on stone">
-              <div class="ph"><img src="https://images.unsplash.com/photo-1623048233970-0460e098f761?w=600&q=70&auto=format&fit=crop" alt="Moss growing on a rock" loading="lazy"></div>
-              <figcaption>25 · stone</figcaption>
-            </figure>
-            <figure class="print" style="--x:5%;--y:52%;--w:50%;--r:-1.5deg" data-full="https://images.unsplash.com/photo-1534269222346-5a896154c41d?w=1600&q=80&auto=format" data-cap="frame 29 · October floor">
-              <div class="ph"><img src="https://images.unsplash.com/photo-1534269222346-5a896154c41d?w=600&q=70&auto=format&fit=crop" alt="Tall trees with dried leaves on the ground" loading="lazy"></div>
-              <figcaption>29 · October floor</figcaption>
-            </figure>
-            <figure class="print" style="--x:50%;--y:60%;--w:46%;--r:3deg" data-full="https://images.unsplash.com/photo-1502252430442-aac78f397426?w=1600&q=80&auto=format" data-cap="frame 33 · from above, the mist">
-              <div class="ph"><img src="https://images.unsplash.com/photo-1502252430442-aac78f397426?w=600&q=70&auto=format&fit=crop" alt="Aerial view of pine trees in mist" loading="lazy"></div>
-              <figcaption>33 · mist</figcaption>
-            </figure>
-          </div>
-          <p class="pencil">Placeholder frames (Unsplash). Same rule as the models: trust what holds up on real data.</p>
-          <span class="folio">9</span>
-        </div>
-      </div>
-
-      <!-- 10 · contact -->
-      <div class="page ruled">
-        <div class="page-inner">
-          <p class="eyebrow">p. 10 · Send word</p>
-          <h2>Building something with agents or vision?</h2>
-          <p>I'm looking for full-time forward deployed and applied AI roles from January 2027. Write to me:</p>
-          <p style="display:flex;flex-wrap:wrap;gap:.6em;align-items:center;margin:1em 0">
-            <code id="email" style="font:700 1.05em/1.2 var(--type);user-select:all;word-break:break-all">nishanthsm01@gmail.com</code>
-            <button class="copy" id="copyBtn" type="button">Copy</button>
-          </p>
-          <div class="linkrow">
-            <a href="https://github.com/nishsm" target="_blank" rel="noopener">github.com/nishsm</a>
-            <a href="https://huggingface.co/nishsm" target="_blank" rel="noopener">huggingface.co/nishsm</a>
-            <a href="https://www.linkedin.com/in/nishanthsm01/" target="_blank" rel="noopener">linkedin.com/in/nishanthsm01</a>
-          </div>
-          <div class="stamp" style="right:8%;bottom:13%;--r:-9deg">Posted<b>Pittsburgh</b>Pennsylvania</div>
-          <span class="folio">10</span>
-        </div>
-      </div>
-
-      <!-- 11 · back cover -->
-      <div class="page cover" data-density="hard">
-        <div class="page-inner">
-          <div class="sub" style="margin:0">Kept by</div>
-          <div class="name" style="margin-top:.6em">N. Madthila</div>
-          <div class="rule"></div>
-          <div class="sub" style="margin:0">Bound on GitHub Pages<br>Pittsburgh · 2026</div>
-        </div>
-      </div>
-
+      <!-- clickable cards are rendered from the notes below -->
     </div>
-
-    <div class="controls" aria-label="Page controls">
-      <button type="button" id="prev">‹ Back</button>
-      <output id="pageNo" aria-live="polite">Cover</output>
-      <button type="button" id="next">Turn ›</button>
-    </div>
-    <p class="hint"><span class="book-only">Drag a page corner or use the arrow keys. </span>Every print can be picked up and moved; tap one to look closer.</p>
+    <p style="text-align:center;font:italic 400 13px/1.4 'Courier Prime',monospace;color:#bfae8c;margin:14px 0 0">Click any print to turn it over. Photos are Unsplash placeholders until my own film goes up.</p>
   </main>
+
+  <section class="list" id="list" aria-labelledby="listTitle">
+    <h2 id="listTitle">The same notes, typed out</h2>
+    <p>For anyone in a hurry, or reading with a screen reader.</p>
+    <div id="listBody"></div>
+  </section>
 
   <footer>
     <span>© 2026 Nishanth Madthila</span>
-    <span>Placeholder photographs from Unsplash</span>
+    <span>Placeholder photographs from Unsplash · cutouts drawn by hand in SVG</span>
   </footer>
 
-  <div class="lightbox" id="lightbox" hidden>
-    <button class="x" type="button" id="lbClose">Close</button>
-    <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <div class="scrim" id="scrim" hidden></div>
+  <div class="flipper" id="flipper" role="dialog" aria-modal="true" aria-labelledby="backTitle" hidden>
+    <div class="flip-inner" id="flipInner">
+      <div class="face front" id="faceFront"></div>
+      <div class="face back"><div class="back-paper" id="backPaper"></div></div>
+    </div>
+  </div>
+  <div class="ctrlbar" id="ctrlbar" hidden>
+    <button type="button" id="cPrev">‹ Prev</button>
+    <button type="button" id="cClose">Close</button>
+    <button type="button" id="cNext">Next ›</button>
   </div>
 
-<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
 <script>
 (function () {
+  var U = function (id, w) { return 'https://images.unsplash.com/' + id + '?w=' + w + '&q=72&auto=format&fit=crop'; };
+  var NOTES = [
+    { id: 'about', label: 'The observer', place: 'Pittsburgh', photo: 'photo-1544039161-b0c20826c6f6', ar: '4/5',
+      pos: { x: '38.5%', y: '15%', w: '19%', r: '-2deg', z: 12 }, tape: 't1',
+      eyebrow: 'About', title: 'Nishanth Madthila', meta: 'AI/ML engineer · CMU MS Information Systems Management, Dec 2026 · Cooper Fellow',
+      body: ['I build ML systems that hold up outside the notebook: agent platforms that operations teams adopt, vision models that survive real video, and tools for reasoning about LLM inference.',
+             'Before CMU: CS at PES University, Bangalore. Now a TA for Introduction to AI and Distributed Systems, and an RA/TA at TEEL Labs teaching AI to U.S. Army personnel.',
+             'Off hours: film photography, F1, chess, cooking.'],
+      links: [['LinkedIn', 'https://www.linkedin.com/in/nishanthsm01/'], ['GitHub', 'https://github.com/nishsm'], ['Hugging Face', 'https://huggingface.co/nishsm']],
+      stamp: ['Pittsburgh', 'PA', '2026'] },
+    { id: 'bny', label: 'BNY', place: 'AI Hub', photo: 'photo-1436476426006-344b576bd5d4', ar: '4/3',
+      pos: { x: '12.5%', y: '16%', w: '22%', r: '-5deg', z: 8 }, tape: 'x',
+      eyebrow: 'Field log · May to Aug 2026', title: 'BNY (Bank of New York Mellon)', meta: 'AI/ML Engineer Intern, AI Hub · Pittsburgh',
+      bullets: ['Turned a one-off document pipeline into a config-driven agent platform: one orchestrator, swappable agent skills, 6 production use cases and 25+ agents.',
+                'Built the self-service agent builder in React and TypeScript, with tools behind MCP so every agent shares auth, least-privilege scoping and tracing. 200+ users; onboarding went from a week to a day.',
+                'Revived a written-off automation by reverse-engineering a remote app’s authentication flow and replaying it programmatically, unblocking 4 operations teams.'],
+      measure: ['155K', 'analyst hours a year saved, an estimated $7.8M'], stamp: ['AI Hub', 'BNY', 'Summer 26'] },
+    { id: 'perflections', label: 'Perflections.ai', place: 'golf CV', photo: 'photo-1448375240586-882707db888b', ar: '4/5',
+      pos: { x: '61%', y: '13%', w: '15%', r: '4deg', z: 9 }, tape: 'pin',
+      eyebrow: 'Field log · Sep 2025 to Feb 2026', title: 'Perflections.ai', meta: 'Founding AI/ML Engineer, part-time · Pittsburgh',
+      bullets: ['A golf ball detector scored 0.935 mAP@50-95 on validation and found the ball in under 10% of real swing frames. Traced it to augmentation that never appears in deployment, then fixed training and small-object inference settings.',
+                'Built tracking where YOLO detections seed SAM 2 mask propagation and periodic re-detection recovers lost tracks, all trained on an 8 GB laptop GPU.'],
+      measure: ['0.935', 'mAP that didn’t survive real video, and the lesson to test on deployment data'], stamp: ['Golf', 'CV', '2025'] },
+    { id: 'slamdunk', label: 'Slamdunk.AI', place: 'Bangalore', photo: 'photo-1576003350554-b10a4f9949f3', ar: '3/4',
+      pos: { x: '77.5%', y: '24%', w: '14%', r: '-3deg', z: 10 }, tape: 't1',
+      eyebrow: 'Field log · 2022 to 2025', title: 'Slamdunk.AI', meta: 'Founding AI/ML Engineer · joined as intern, promoted to lead the recommendation team · Bangalore',
+      bullets: ['Built the coaching recommendation engine from scratch, then rebuilt it after sitting with tennis coaches: RAG over FAISS with LoRA-tuned models.',
+                'Shipped real-time athlete tracking with YOLOv8 and MediaPipe at 96% detection accuracy; ONNX export cut the model 40% and serving changes cut cloud cost 70%.',
+                'Led a team of 3 to ship the production MVP in 3 months.'],
+      measure: ['12×', 'faster coaching feedback, 3 minutes to under 15 seconds'], stamp: ['Bangalore', 'IN', 'Intern to lead'] },
+    { id: 'swingtrace', label: 'SwingTrace', place: 'open source', photo: 'photo-1592515058976-54f480329a72', ar: '4/3',
+      pos: { x: '9%', y: '50%', w: '19%', r: '3deg', z: 11 }, tape: 'c',
+      eyebrow: 'Specimen 01 · open source', title: 'SwingTrace', meta: 'Golf club tracking from ordinary swing video · YOLO11m, OpenCV, SciPy',
+      bullets: ['Fine-tuned a shaft, club head and hands detector, then reconstructed the swing path: missed heads are recovered from shaft geometry and the path is smoothed with cubic splines.',
+                'Weights on Hugging Face. Trained on the CC BY 4.0 golf-club-tracking dataset from Roboflow Universe.'],
+      measure: ['93.4%', 'of 3,018 frames tracked on 7 unseen videos, vs 71.6% from head detection alone'],
+      links: [['GitHub', 'https://github.com/nishsm'], ['Hugging Face', 'https://huggingface.co/nishsm']], stamp: ['Specimen', '01', 'Open source'] },
+    { id: 'roofline', label: 'llm-roofline-agent', place: '', photo: 'photo-1502252430442-aac78f397426', ar: '1/1',
+      pos: { x: '28.5%', y: '55%', w: '15%', r: '-4deg', z: 13 }, tape: 't1',
+      eyebrow: 'Specimen 02 · open source', title: 'llm-roofline-agent', meta: 'A roofline performance model for LLM inference · validated on an NVIDIA T4',
+      bullets: ['Models prefill and decode by arithmetic intensity against a GPU’s compute and memory-bandwidth ceilings, to show when inference is memory-bound and when batching helps.',
+                'Batch-1 decode reads every weight once per token, so it does about 1 FLOP per byte and sits far below the ridge.'],
+      measure: ['203', 'FLOP per byte: the T4 ridge point (65 TFLOP/s over 320 GB/s)'], links: [['GitHub', 'https://github.com/nishsm']], stamp: ['Specimen', '02', 'T4'] },
+    { id: 'agency', label: 'Excessive Agency', place: 'CMU', photo: 'photo-1509101758186-479a713d3687', ar: '4/3',
+      pos: { x: '59.5%', y: '49%', w: '18.5%', r: '2.5deg', z: 11 }, tape: 'x',
+      eyebrow: 'Research · Sep 2026 to now', title: 'Excessive Agency in LLM agents', meta: 'Independent study, Applied Generative AI Research Lab, Carnegie Mellon',
+      bullets: ['Extending the open-source LLM Guard library with graph-based, attribute-based access control for multi-step agents (OWASP LLM06).',
+                'Benchmarking defenses on AgentDojo against prompt injection, data exfiltration and confused-deputy attacks.',
+                'Grew straight out of the least-privilege guardrails I built for agents at BNY.'],
+      measure: ['LLM06', 'OWASP Top 10 for LLMs: agents doing more than they should'], stamp: ['Research', 'CMU', 'In progress'] },
+    { id: 'bbbnet', label: 'BBBNet', place: 'IEEE 2023', photo: 'photo-1580873317794-1e8b7816efbb', ar: '3/4',
+      pos: { x: '45.5%', y: '58%', w: '12%', r: '6deg', z: 14 }, tape: 'pin',
+      eyebrow: 'Publication · IEEE 2023', title: 'BBBNet', meta: 'Blood-brain barrier permeability with graph neural networks · PyTorch Geometric',
+      bullets: ['Graph convolutional networks that predict whether a drug molecule crosses the blood-brain barrier, to speed up Alzheimer’s drug screening.',
+                'Built with a research analyst from a pharmaceutical company for domain grounding. The repo recreates the paper, then compares GCN variants.'],
+      measure: ['96.7%', 'AUROC, at 91% accuracy'], links: [['Read the paper', 'https://doi.org/10.1109/ICACITE57410.2023.10182598'], ['GitHub', 'https://github.com/nishsm']], stamp: ['IEEE', '2023', 'Published'] },
+    { id: 'soc', label: 'SOC Agent', place: 'LangGraph', photo: 'photo-1426170042593-200f250dfdaf', ar: '4/3',
+      pos: { x: '76%', y: '59%', w: '17%', r: '-4.5deg', z: 12 }, tape: 'c',
+      eyebrow: 'Specimen 03 · Oct to Nov 2025', title: 'Autonomous SOC Agent', meta: 'A two-agent security operations loop · LangGraph, Ollama, FAISS',
+      bullets: ['An observer agent flags anomalous network flows with an Isolation Forest trained on CICIDS2017.',
+                'A planner agent drafts incident recovery plans with a local LLM, grounded in a retrieved knowledge base of playbooks.'],
+      measure: ['2', 'agents in a LangGraph loop, fully local'], links: [['GitHub', 'https://github.com/nishsm']], stamp: ['Specimen', '03', 'Local LLM'] },
+    { id: 'contact', label: 'Send word', place: '', ticket: true,
+      pos: { x: '38%', y: '84.5%', w: '23%', r: '-2deg', z: 25 },
+      eyebrow: 'Contact', title: 'Send word', meta: 'Open to full-time forward deployed and applied AI roles from January 2027',
+      body: ['If you’re building something with agents, vision or LLM inference, I’d like to hear about it.'],
+      mail: 'nishanthsm01@gmail.com',
+      links: [['LinkedIn', 'https://www.linkedin.com/in/nishanthsm01/'], ['GitHub', 'https://github.com/nishsm'], ['Hugging Face', 'https://huggingface.co/nishsm']], stamp: ['Posted', 'PIT', 'Reply soon'] }
+  ];
+
+  var board = document.getElementById('board');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var wide = window.matchMedia('(min-width: 900px)');
-  var bookEl = document.getElementById('book');
-  var pages = bookEl.querySelectorAll('.page');
-  var flip = null;
-  var names = ['Cover', 'Contents'];
-  for (var i = 2; i < pages.length - 1; i++) names[i] = 'p. ' + i;
-  names[pages.length - 1] = 'Back cover';
 
-  function label(i) {
-    var out = document.getElementById('pageNo');
-    if (i === 0 || i === pages.length - 1) { out.textContent = names[i]; return; }
-    var a = i % 2 ? i : i - 1;
-    out.textContent = a === 1 ? 'Contents · p. 2' : 'p. ' + a + '–' + (a + 1);
+  // torn paper edge: a jagged polygon, seeded so each card keeps its own tear
+  function rng(seed) { var s = seed; return function () { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; }
+  function torn(seed) {
+    var r = rng(seed * 7919 + 13), pts = [], n = 22, j = 1.6, i, t;
+    for (i = 0; i <= n; i++) { t = i / n * 100; pts.push(t.toFixed(1) + '% ' + (r() * j).toFixed(2) + '%'); }
+    for (i = 1; i <= n; i++) { t = i / n * 100; pts.push((100 - r() * j).toFixed(2) + '% ' + t.toFixed(1) + '%'); }
+    for (i = n - 1; i >= 0; i--) { t = i / n * 100; pts.push(t.toFixed(1) + '% ' + (100 - r() * j * 1.4).toFixed(2) + '%'); }
+    for (i = n - 1; i >= 1; i--) { t = i / n * 100; pts.push((r() * j).toFixed(2) + '% ' + t.toFixed(1) + '%'); }
+    return 'polygon(' + pts.join(',') + ')';
   }
+  document.querySelectorAll('.card.deco .tear').forEach(function (el, i) { el.style.clipPath = torn(90 + i); });
 
-  if (wide.matches && window.St && St.PageFlip) {
-    flip = new St.PageFlip(bookEl, {
-      width: 460, height: 620, size: 'stretch',
-      minWidth: 300, maxWidth: 620, minHeight: 405, maxHeight: 837,
-      showCover: true, usePortrait: false, mobileScrollSupport: false,
-      maxShadowOpacity: 0.45, flippingTime: reduce ? 250 : 900,
-      disableFlipByClick: true, showPageCorners: true, autoSize: true
-    });
-    flip.loadFromHTML(pages);
-    flip.on('flip', function (e) { label(e.data); });
-    label(0);
-    document.getElementById('prev').addEventListener('click', function () { flip.flipPrev(); });
-    document.getElementById('next').addEventListener('click', function () { flip.flipNext(); });
-    document.addEventListener('keydown', function (e) {
-      if (!document.getElementById('lightbox').hidden) return;
-      if (e.key === 'ArrowRight') flip.flipNext();
-      if (e.key === 'ArrowLeft') flip.flipPrev();
-    });
-  } else {
-    document.body.classList.add('stacked');
-  }
-  var startedWide = wide.matches;
-  wide.addEventListener && wide.addEventListener('change', function (e) { if (e.matches !== startedWide) location.reload(); });
-
-  // jump links (contents + top nav)
-  document.querySelectorAll('[data-goto]').forEach(function (el) {
-    el.addEventListener('click', function (e) {
-      e.preventDefault();
-      var n = +el.dataset.goto;
-      if (flip) { flip.flip(n); document.querySelector('.desk').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }
-      else pages[n].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-    });
-  });
-
-  // stop the book from starting a page turn when pressing on interactive bits
-  bookEl.querySelectorAll('.print, button, a, code').forEach(function (el) {
-    ['mousedown', 'touchstart'].forEach(function (t) { el.addEventListener(t, function (e) { e.stopPropagation(); }, { passive: true }); });
-  });
-
-  // prints: pick up and move (book mode), tap to enlarge (both modes)
-  var lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
-  var lastFocus = null;
-  function openLB(p) {
-    lastFocus = document.activeElement;
-    lbImg.src = p.dataset.full; lbImg.alt = p.querySelector('img').alt; lbCap.textContent = p.dataset.cap || '';
-    lb.hidden = false; document.getElementById('lbClose').focus();
-  }
-  function closeLB() { lb.hidden = true; lbImg.removeAttribute('src'); if (lastFocus) lastFocus.focus(); }
-  document.getElementById('lbClose').addEventListener('click', closeLB);
-  lb.addEventListener('click', function (e) { if (e.target === lb) closeLB(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) closeLB(); });
-
-  var z = 10;
-  bookEl.querySelectorAll('.print').forEach(function (p) {
-    p.tabIndex = 0; p.setAttribute('role', 'button');
-    p.setAttribute('aria-label', 'Open photo: ' + (p.dataset.cap || 'print'));
-    p.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(p); } });
-    var sx, sy, ox, oy, moved, down = false, page;
-    p.addEventListener('pointerdown', function (e) {
-      e.stopPropagation();
-      down = true; moved = false; sx = e.clientX; sy = e.clientY;
-      ox = parseFloat(p.style.getPropertyValue('--dx')) || 0; oy = parseFloat(p.style.getPropertyValue('--dy')) || 0;
-      page = p.closest('.page');
-      if (flip) { p.setPointerCapture(e.pointerId); p.classList.add('lift'); p.style.zIndex = ++z; }
-    });
-    p.addEventListener('pointermove', function (e) {
-      if (!down || !flip) return;
-      var dx = e.clientX - sx, dy = e.clientY - sy;
-      if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
-      var pr = page.getBoundingClientRect(), r = p.getBoundingClientRect();
-      var nx = ox + dx, ny = oy + dy;
-      // keep at least a third of the print on the page
-      var baseL = r.left - (parseFloat(p.style.getPropertyValue('--dx')) || 0), baseT = r.top - (parseFloat(p.style.getPropertyValue('--dy')) || 0);
-      nx = Math.max(pr.left - baseL - r.width * 0.66, Math.min(pr.right - baseL - r.width * 0.34, nx));
-      ny = Math.max(pr.top - baseT - r.height * 0.66, Math.min(pr.bottom - baseT - r.height * 0.34, ny));
-      p.style.setProperty('--dx', nx + 'px'); p.style.setProperty('--dy', ny + 'px');
-    });
-    function end(e) {
-      if (!down) return; down = false; p.classList.remove('lift');
-      if (!moved) openLB(p);
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function frontHTML(n, w) {
+    if (n.ticket) {
+      return '<div class="tear"><div class="ticket-in"><div class="ticket-main"><span>Passage · No. 0010</span><b>Send word</b><span class="tk-mail">nishanthsm01@gmail.com</span><span>Pittsburgh · anywhere</span></div><div class="ticket-stub">Admit one</div></div></div>';
     }
-    p.addEventListener('pointerup', end);
-    p.addEventListener('pointercancel', function () { down = false; p.classList.remove('lift'); });
+    return '<div class="tear"><div class="ph" style="--ar:' + n.ar + '"><img src="' + U(n.photo, w) + '" alt="' + esc(n.label) + ' (placeholder photo)" loading="lazy"></div>' +
+      '<span class="cap">' + esc(n.label) + (n.place ? ' <small>· ' + esc(n.place) + '</small>' : '') + '</span></div>';
+  }
+  function tapeHTML(t) {
+    if (t === 't1') return '<span class="tape t1" aria-hidden="true"></span>';
+    if (t === 'x') return '<span class="tape x1" aria-hidden="true"></span><span class="tape x2" aria-hidden="true"></span>';
+    if (t === 'c') return '<span class="tape c1" aria-hidden="true"></span>';
+    if (t === 'pin') return '<span class="pin" aria-hidden="true"></span>';
+    return '';
+  }
+
+  var cards = NOTES.map(function (n, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'card' + (n.ticket ? ' ticket wide' : '') + (n.id === 'about' ? ' wide' : '');
+    b.style.cssText = '--x:' + n.pos.x + ';--y:' + n.pos.y + ';--w:' + n.pos.w + ';--wn:' + parseFloat(n.pos.w) + ';--r:' + n.pos.r + ';--z:' + n.pos.z;
+    b.setAttribute('aria-label', 'Turn over: ' + n.title);
+    b.innerHTML = tapeHTML(n.tape) + frontHTML(n, 700);
+    b.querySelector('.tear').style.clipPath = torn(i + 1);
+    b.addEventListener('click', function () { open(i); });
+    board.appendChild(b);
+    return b;
   });
 
-  // copy email
-  var btn = document.getElementById('copyBtn');
-  btn.addEventListener('click', function () {
-    var el = document.getElementById('email');
-    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); };
-    var fallback = function () { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected'; };
-    try { navigator.clipboard.writeText(el.textContent).then(done, fallback); } catch (e) { fallback(); }
+  function backHTML(n, i) {
+    var h = '<p class="eyebrow"><span>' + esc(n.eyebrow) + '</span><span>' + String(i + 1).padStart(2, '0') + ' / ' + NOTES.length + '</span></p>';
+    h += '<h2 id="backTitle">' + esc(n.title) + '</h2><p class="meta">' + esc(n.meta) + '</p>';
+    if (n.stamp) h += '<div class="bstamp" aria-hidden="true">' + esc(n.stamp[0]) + '<b>' + esc(n.stamp[1]) + '</b>' + esc(n.stamp[2]) + '</div>';
+    if (n.measure) h += '<div class="measure"><b>' + esc(n.measure[0]) + '</b><span>' + esc(n.measure[1]) + '</span></div>';
+    if (n.body) n.body.forEach(function (p) { h += '<p>' + esc(p) + '</p>'; });
+    if (n.bullets) h += '<ul>' + n.bullets.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+    if (n.mail) h += '<code class="mail" id="mail">' + esc(n.mail) + '</code>';
+    if (n.links || n.mail) {
+      h += '<div class="links">';
+      if (n.mail) h += '<button type="button" id="copyMail">Copy email</button>';
+      (n.links || []).forEach(function (l) { h += '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener">' + esc(l[0]) + ' ↗</a>'; });
+      h += '</div>';
+    }
+    return h;
+  }
+
+  // plain list version
+  document.getElementById('listBody').innerHTML = NOTES.map(function (n) {
+    var h = '<article><h3>' + esc(n.title) + '</h3><p class="meta">' + esc(n.eyebrow) + ' · ' + esc(n.meta) + '</p>';
+    if (n.measure) h += '<p><b>' + esc(n.measure[0]) + '</b> ' + esc(n.measure[1]) + '</p>';
+    if (n.body) n.body.forEach(function (p) { h += '<p>' + esc(p) + '</p>'; });
+    if (n.bullets) h += '<ul>' + n.bullets.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+    if (n.mail) h += '<p>' + esc(n.mail) + '</p>';
+    if (n.links) h += '<p>' + n.links.map(function (l) { return '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener">' + esc(l[0]) + '</a>'; }).join(' · ') + '</p>';
+    return h + '</article>';
+  }).join('');
+
+  // ---------- fly to centre and flip ----------
+  var scrim = document.getElementById('scrim'), flipper = document.getElementById('flipper'), inner = document.getElementById('flipInner');
+  var front = document.getElementById('faceFront'), back = document.getElementById('backPaper'), bar = document.getElementById('ctrlbar');
+  var cur = -1, busy = false, anims = [];
+
+  function target() {
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var w = Math.min(560, vw - 32), h = Math.min(Math.round(w * 1.22), vh - 110);
+    return { w: w, h: h, l: (vw - w) / 2, t: Math.max(16, (vh - h) / 2 - 24) };
+  }
+  // size the card to its notes: measure the back at the target width, then cap to the screen
+  function fit() {
+    var T = target();
+    flipper.style.cssText = 'left:' + T.l + 'px;top:0;width:' + T.w + 'px;height:2000px;visibility:hidden';
+    flipper.hidden = false;
+    back.style.minHeight = '0'; var need = back.offsetHeight; back.style.minHeight = '';
+    var h = Math.max(Math.min(380, T.h), Math.min(need + 2, T.h));
+    T.h = h; T.t = Math.max(16, (window.innerHeight - h) / 2 - 24);
+    flipper.style.cssText = 'left:' + T.l + 'px;top:' + T.t + 'px;width:' + T.w + 'px;height:' + T.h + 'px';
+    return T;
+  }
+  function fromCard(i, T) {
+    var r = cards[i].getBoundingClientRect(), rot = NOTES[i].pos.r;
+    var dx = (r.left + r.width / 2) - (T.l + T.w / 2), dy = (r.top + r.height / 2) - (T.t + T.h / 2);
+    return 'translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + ') scale(' + (r.width / T.w).toFixed(4) + ',' + (r.height / T.h).toFixed(4) + ')';
+  }
+  function fill(i) {
+    var n = NOTES[i];
+    front.innerHTML = frontHTML(n, 1200);
+    front.querySelector('.tear').style.clipPath = torn(i + 1);
+    back.innerHTML = backHTML(n, i);
+    back.scrollTop = 0;
+    var cb = document.getElementById('copyMail');
+    if (cb) cb.addEventListener('click', function () {
+      var el = document.getElementById('mail');
+      var done = function () { cb.textContent = 'Copied'; setTimeout(function () { cb.textContent = 'Copy email'; }, 1600); };
+      var fb = function () { var rg = document.createRange(); rg.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(rg); cb.textContent = 'Selected'; };
+      try { navigator.clipboard.writeText(el.textContent).then(done, fb); } catch (e) { fb(); }
+    });
+  }
+  var lastFocus = null;
+  function open(i) {
+    if (busy || cur !== -1) return;
+    busy = true; cur = i; lastFocus = cards[i];
+    fill(i);
+    var T = fit();
+    scrim.hidden = false; flipper.hidden = false; bar.hidden = false;
+    cards[i].style.visibility = 'hidden';
+    document.body.style.overflow = 'hidden';
+    if (reduce) {
+      inner.style.transform = 'rotateY(180deg)';
+      busy = false; document.getElementById('cClose').focus(); return;
+    }
+    var d = 760;
+    anims = [
+      scrim.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'both' }),
+      flipper.animate([{ transform: fromCard(i, T) }, { transform: 'none' }], { duration: d, easing: 'cubic-bezier(.2,.75,.2,1)', fill: 'both' }),
+      inner.animate([{ transform: 'rotateY(0deg)' }, { transform: 'rotateY(180deg)' }], { duration: d - 120, delay: 140, easing: 'cubic-bezier(.45,.05,.25,1)', fill: 'both' })
+    ];
+    anims[1].finished.then(function () { busy = false; document.getElementById('cClose').focus(); });
+  }
+  function close() {
+    if (busy || cur === -1) return;
+    busy = true;
+    var i = cur, r0 = flipper.getBoundingClientRect(), T = { l: r0.left, t: r0.top, w: r0.width, h: r0.height };
+    function done() {
+      anims.forEach(function (a) { a.cancel(); }); anims = [];
+      inner.style.transform = '';
+      scrim.hidden = true; flipper.hidden = true; bar.hidden = true;
+      cards[i].style.visibility = ''; document.body.style.overflow = '';
+      cur = -1; busy = false;
+      if (lastFocus) lastFocus.focus();
+    }
+    if (reduce) { done(); return; }
+    anims.forEach(function (a) { a.cancel(); });
+    inner.style.transform = 'rotateY(180deg)';
+    var d = 620;
+    var a1 = flipper.animate([{ transform: 'none' }, { transform: fromCard(i, T) }], { duration: d, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'both' });
+    inner.animate([{ transform: 'rotateY(180deg)' }, { transform: 'rotateY(360deg)' }], { duration: d - 140, easing: 'cubic-bezier(.45,.05,.25,1)', fill: 'both' });
+    scrim.animate([{ opacity: 1 }, { opacity: 0 }], { duration: d, fill: 'both' });
+    a1.finished.then(done);
+  }
+  function step(dir) {
+    if (busy || cur === -1) return;
+    var next = (cur + dir + NOTES.length) % NOTES.length;
+    cards[cur].style.visibility = '';
+    cards[next].style.visibility = 'hidden';
+    cur = next; lastFocus = cards[next];
+    if (reduce) { fill(next); fit(); return; }
+    busy = true;
+    var a = back.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(' + (-dir * 18) + 'px)' }], { duration: 160, easing: 'ease-in' });
+    a.finished.then(function () {
+      fill(next); fit();
+      back.animate([{ opacity: 0, transform: 'translateX(' + (dir * 18) + 'px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'ease-out' }).finished.then(function () { busy = false; });
+    });
+  }
+  scrim.addEventListener('click', close);
+  document.getElementById('cClose').addEventListener('click', close);
+  document.getElementById('cPrev').addEventListener('click', function () { step(-1); });
+  document.getElementById('cNext').addEventListener('click', function () { step(1); });
+  document.addEventListener('keydown', function (e) {
+    if (cur === -1) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowRight') step(1);
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'Tab') {
+      var f = [].slice.call(document.querySelectorAll('#backPaper a, #backPaper button, #ctrlbar button'));
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (cur === -1 || busy) return;
+    fit();
   });
 })();
 </script>
