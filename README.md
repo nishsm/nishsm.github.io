@@ -1,5 +1,5 @@
 # nishsm.github.io
 
-Personal site of Nishanth Madthila: a one-page collage of field notes. Click any print to turn it over.
+Personal site of Nishanth (Nish) Madthila, AI/ML engineer.
 
-One hand-built `index.html`, no build step, served by GitHub Pages. Photos are Unsplash placeholders for now.
+One hand-built `index.html`, no build step, served by GitHub Pages.
