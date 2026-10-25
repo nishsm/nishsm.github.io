@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nishanth Madthila</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Nishanth Madthila: AI/ML engineer building agentic LLM platforms, computer vision, and inference tooling. CMU MSISM 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,400;1,6..96,600&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a night gallery. Hero pairs the name with a framed daylight painting (day sky over a night page); below, the work reads as wall labels in one ~68ch column. Single deliberate dark world. */
+:root {
+  --night: #0d1330;
+  --night-2: #151c41;
+  --cloud: #eef1f7;
+  --mist: #9ba6c6;
+  --line: rgba(238, 241, 247, 0.13);
+  --gold: #e8c468;
+  --sky-hi: #6f9bd1;
+  --sky-lo: #d6e4f1;
+  --sand: #d6b689;
+  --sand-dk: #a9865c;
+  --suit: #1a2142;
+  --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --body: "Figtree", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--night); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--night); color: var(--cloud);
+  font: 400 1.0625rem/1.65 var(--body); -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,.55), transparent 60%),
+    radial-gradient(1px 1px at 78% 9%, rgba(255,255,255,.45), transparent 60%),
+    radial-gradient(1.5px 1.5px at 46% 31%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(1px 1px at 91% 44%, rgba(255,255,255,.4), transparent 60%),
+    radial-gradient(1px 1px at 23% 63%, rgba(255,255,255,.3), transparent 60%),
+    radial-gradient(1px 1px at 64% 81%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(900px 500px at 85% -10%, rgba(232,196,104,.10), transparent 70%);
+  background-attachment: fixed;
+}
+a { color: inherit; text-decoration-color: rgba(232,196,104,.5); text-underline-offset: 3px; }
+a:hover { color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--gold); color: var(--night); }
+
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.bar {
+  display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center;
+  padding-block: 22px; font: 400 0.8125rem/1 var(--mono); color: var(--mist);
+}
+.bar nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.bar nav a { text-decoration: none; }
+.lamp { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); margin-right: 8px; vertical-align: 1px; box-shadow: 0 0 12px 3px rgba(232,196,104,.55); }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr); gap: 56px; align-items: center; padding-block: 36px 80px; }
+.kicker { font: 400 0.75rem/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin: 0 0 22px; }
+.hero h1 { font: 500 clamp(3rem, 7.6vw, 6rem)/0.92 var(--display); letter-spacing: -0.02em; margin: 0 0 26px; text-wrap: balance; }
+.hero h1 i { font-weight: 400; color: var(--gold); }
+.lede { font-size: 1.2rem; line-height: 1.55; max-width: 36ch; margin: 0 0 30px; color: var(--cloud); text-wrap: pretty; }
+.lede i { font-family: var(--display); font-size: 1.12em; color: var(--gold); }
+.links { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 11px 17px; border-radius: 999px;
+  border: 1px solid var(--line); background: rgba(255,255,255,.03); text-decoration: none; color: var(--cloud);
+  font: 500 0.8438rem/1 var(--mono); cursor: pointer; transition: border-color .25s, background .25s, color .25s;
+}
+.btn:hover { border-color: var(--gold); color: var(--gold); }
+.btn.primary { background: var(--gold); border-color: var(--gold); color: var(--night); }
+.btn.primary:hover { background: transparent; color: var(--gold); }
+
+/* the painting */
+.painting { margin: 0; min-width: 0; }
+.frame {
+  position: relative; padding: 14px; border-radius: 4px;
+  background: linear-gradient(135deg, #b8913f, #f1d98c 30%, #9c7630 55%, #e6c674 80%, #8a6727);
+  box-shadow: 0 40px 80px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(0,0,0,.4), 0 0 90px -10px rgba(232,196,104,.18);
+}
+.frame::after { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(60,40,10,.45); pointer-events: none; }
+.scene { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; max-width: 100%; background: var(--sky-lo); }
+.plaque {
+  display: grid; gap: 2px; margin: 18px auto 0; width: fit-content; max-width: 100%; text-align: center;
+  padding: 10px 18px; border: 1px solid var(--line); background: rgba(255,255,255,.03);
+  font: 400 0.75rem/1.45 var(--mono); color: var(--mist);
+}
+.plaque b { font: italic 400 1rem/1.3 var(--display); color: var(--cloud); }
+
+.layer { transition: transform .9s cubic-bezier(.2,.7,.2,1); will-change: transform; }
+@media (prefers-reduced-motion: no-preference) {
+  .drift-a { animation: drift 38s linear infinite; }
+  .drift-b { animation: drift 54s linear infinite reverse; }
+  .bob { animation: bob 7s ease-in-out infinite; }
+  .twinkle { animation: twinkle 3.2s ease-in-out infinite; }
+  .twinkle:nth-child(3n) { animation-delay: 1.1s; } .twinkle:nth-child(3n+1) { animation-delay: 2s; }
+  .orbit { animation: orbit 16s linear infinite; transform-origin: 330px 372px; }
+  @keyframes drift { from { transform: translateX(-60px); } 50% { transform: translateX(60px); } to { transform: translateX(-60px); } }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+  @keyframes twinkle { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  @keyframes orbit { to { transform: rotate(360deg); } }
+}
+
+/* strip */
+.strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--line); }
+.strip div { padding: 24px 18px 24px 0; min-width: 0; }
+.strip div + div { padding-left: 18px; border-left: 1px solid var(--line); }
+.strip b { display: block; font: 500 clamp(2rem, 4vw, 2.75rem)/1 var(--display); font-variant-numeric: lining-nums tabular-nums; color: var(--gold); }
+.strip span { display: block; margin-top: 10px; font-size: 0.875rem; color: var(--mist); line-height: 1.4; }
+
+/* sections */
+section { padding-block: 96px 0; }
+.sec-head { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 32px; margin-bottom: 36px; align-items: baseline; }
+.label { font: 400 0.75rem/1 var(--mono); text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold); }
+.sec-head h2 { font: italic 400 clamp(2rem, 4vw, 3rem)/1.05 var(--display); margin: 0; text-wrap: balance; max-width: 20ch; }
+
+.entry { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 32px; padding-block: 34px; border-top: 1px solid var(--line); }
+.entry:last-child { border-bottom: 1px solid var(--line); }
+.when { font: 400 0.8125rem/1.5 var(--mono); color: var(--mist); font-variant-numeric: tabular-nums; }
+.when span { display: block; margin-top: 4px; }
+.entry h3 { font: 500 1.6rem/1.2 var(--display); margin: 0 0 4px; }
+.role { color: var(--mist); margin: 0 0 16px; font-size: 0.9375rem; }
+.entry ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 11px; max-width: 68ch; }
+.entry li { padding-left: 22px; position: relative; }
+.entry li::before { content: ""; position: absolute; left: 0; top: .68em; width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--gold); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.tag { font: 400 0.75rem/1 var(--mono); padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--mist); }
+
+/* projects */
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.proj {
+  display: flex; flex-direction: column; gap: 10px; padding: 26px; border-radius: 6px;
+  background: var(--night-2); border: 1px solid var(--line); text-decoration: none; min-width: 0;
+  transition: border-color .25s, transform .25s;
+}
+a.proj:hover { border-color: rgba(232,196,104,.6); transform: translateY(-2px); color: var(--cloud); }
+@media (prefers-reduced-motion: reduce) { .btn, a.proj, .layer { transition: none; } a.proj:hover { transform: none; } }
+.kind { font: 400 0.6875rem/1 var(--mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--mist); display: flex; justify-content: space-between; gap: 8px; }
+.kind .live { color: var(--gold); }
+.proj h3 { font: 500 1.6rem/1.15 var(--display); margin: 4px 0 0; }
+.proj p { margin: 0; color: var(--mist); font-size: 0.9688rem; }
+.metric { margin-top: auto; padding-top: 14px; border-top: 1px dashed var(--line); font: 400 0.8125rem/1.45 var(--mono); }
+.metric b { color: var(--gold); font-weight: 500; }
+.wide { grid-column: 1 / -1; }
+
+/* roofline instrument card */
+.instrument { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 28px; align-items: center; }
+canvas { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; max-width: 100%; }
+.ctrl { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; margin-top: 10px; font: 400 0.8125rem/1 var(--mono); color: var(--mist); }
+.ctrl output { color: var(--cloud); min-width: 4ch; text-align: right; font-variant-numeric: tabular-nums; }
+input[type=range] { width: 100%; accent-color: var(--gold); }
+.readout { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 14px; border-top: 1px solid var(--line); padding-top: 12px; }
+.readout div { font: 400 0.6875rem/1.3 var(--mono); color: var(--mist); text-transform: uppercase; letter-spacing: 0.06em; min-width: 0; }
+.readout strong { display: block; font: 500 1.0625rem/1.3 var(--mono); color: var(--cloud); text-transform: none; letter-spacing: 0; font-variant-numeric: tabular-nums; margin-top: 3px; }
+.readout .bound { color: var(--gold); }
+
+/* about */
+.about { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 32px; }
+.about p { margin: 0 0 18px; max-width: 64ch; font-size: 1.125rem; text-wrap: pretty; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 30px; max-width: 780px; }
+.facts h4 { margin: 0 0 8px; font: 400 0.75rem/1 var(--mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); }
+.facts p { font-size: 0.9375rem; margin: 0; color: var(--mist); }
+
+.contact { padding-block: 120px 60px; text-align: center; }
+.contact h2 { font: italic 400 clamp(2.5rem, 6.6vw, 5rem)/1 var(--display); margin: 0 auto 30px; max-width: 16ch; text-wrap: balance; }
+.mail { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; margin-bottom: 28px; }
+.mail code { font: 500 clamp(1rem, 2.4vw, 1.375rem)/1.2 var(--mono); user-select: all; word-break: break-all; color: var(--gold); }
+.contact .links { justify-content: center; }
+footer { border-top: 1px solid var(--line); padding-block: 24px 40px; font: 400 0.75rem/1.5 var(--mono); color: var(--mist); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 880px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-block: 20px 60px; }
+  .sec-head, .entry, .about, .instrument { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .strip div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .strip div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .projects { grid-template-columns: minmax(0, 1fr); }
+  .facts { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  section { padding-block: 68px 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .rise { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+  .d1 { animation-delay: .1s; } .d2 { animation-delay: .2s; } .d3 { animation-delay: .3s; }
+  @keyframes rise { from { transform: translateY(14px); opacity: .001; } to { transform: none; opacity: 1; } }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="bar">
+    <span><span class="lamp" aria-hidden="true"></span>Pittsburgh · open to full-time roles from Jan 2027</span>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <p class="kicker rise">AI/ML Engineer · CMU MSISM ’26</p>
+      <h1 class="rise d1">Nishanth <i>Madthila</i></h1>
+      <p class="lede rise d2">I build agent platforms that operations teams actually adopt, computer vision that survives <i>real</i> video, and tools for reasoning about LLM inference.</p>
+      <div class="links rise d3">
+        <a class="btn primary" href="#contact">Get in touch</a>
+        <a class="btn" href="https://github.com/nishsm" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://huggingface.co/nishsm" target="_blank" rel="noopener">Hugging Face</a>
+        <a class="btn" href="https://www.linkedin.com/in/nishanthsm01/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+
+    <figure class="painting rise d2" id="painting">
+      <div class="frame">
+        <svg class="scene" viewBox="0 0 600 600" role="img" aria-label="Surreal self-portrait: a suited silhouette stands in a daylit desert under drifting clouds. Its head is a window onto a starry night where a golf ball circles like a moon. A ladder leans into a cloud and a doorway on the horizon opens onto night.">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#6f9bd1"/><stop offset=".72" stop-color="#cfe0ef"/><stop offset="1" stop-color="#f3e6cf"/>
+            </linearGradient>
+            <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#e2c79c"/><stop offset="1" stop-color="#b8925f"/>
+            </linearGradient>
+            <linearGradient id="nightIn" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#070b22"/><stop offset="1" stop-color="#1c2a66"/>
+            </linearGradient>
+            <linearGradient id="suit" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#252e5a"/><stop offset="1" stop-color="#121735"/>
+            </linearGradient>
+            <clipPath id="headClip"><ellipse cx="330" cy="372" rx="76" ry="94"/></clipPath>
+            <clipPath id="doorClip"><rect x="497" y="386" width="40" height="76"/></clipPath>
+            <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+              <stop offset="0" stop-color="#e8c468" stop-opacity=".9"/><stop offset="1" stop-color="#e8c468" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <rect width="600" height="600" fill="url(#sky)"/>
+
+          <g class="layer" data-depth="26">
+            <g class="drift-b" fill="#fff" opacity=".85">
+              <circle cx="90" cy="96" r="22"/><circle cx="118" cy="86" r="28"/><circle cx="150" cy="98" r="20"/><rect x="88" y="98" width="64" height="20" rx="10"/>
+              <circle cx="470" cy="70" r="18"/><circle cx="494" cy="60" r="24"/><circle cx="522" cy="72" r="17"/><rect x="468" y="72" width="56" height="17" rx="8"/>
+            </g>
+          </g>
+
+          <rect y="462" width="600" height="138" fill="url(#sand)"/>
+          <path d="M0 462 H600" stroke="#9a7a52" stroke-width="1" opacity=".5"/>
+
+          <g class="layer" data-depth="10">
+            <!-- doorway onto night -->
+            <rect x="491" y="380" width="52" height="84" fill="#efe2c9"/>
+            <g clip-path="url(#doorClip)">
+              <rect x="497" y="386" width="40" height="76" fill="url(#nightIn)"/>
+              <circle cx="527" cy="400" r="5" fill="#e8c468"/>
+              <circle class="twinkle" cx="506" cy="396" r="1.2" fill="#fff"/><circle class="twinkle" cx="515" cy="420" r="1" fill="#fff"/><circle class="twinkle" cx="530" cy="438" r="1.1" fill="#fff"/>
+            </g>
+            <path d="M543 464 L600 488 L600 500 L533 466 Z" fill="#7d6040" opacity=".35"/>
+            <!-- ladder into a cloud -->
+            <g stroke="#6b4e2f" stroke-width="4" stroke-linecap="round">
+              <line x1="70" y1="520" x2="104" y2="168"/><line x1="112" y1="520" x2="132" y2="168"/>
+            </g>
+            <g stroke="#6b4e2f" stroke-width="3" stroke-linecap="round">
+              <line x1="74" y1="480" x2="114" y2="480"/><line x1="78" y1="440" x2="117" y2="440"/><line x1="82" y1="400" x2="119" y2="400"/>
+              <line x1="86" y1="360" x2="121" y2="360"/><line x1="89" y1="320" x2="124" y2="320"/><line x1="93" y1="280" x2="126" y2="280"/>
+              <line x1="97" y1="240" x2="128" y2="240"/><line x1="100" y1="200" x2="130" y2="200"/>
+            </g>
+            <path d="M112 520 L210 560 L196 566 L70 520 Z" fill="#7d6040" opacity=".3"/>
+            <g fill="#fff">
+              <circle cx="96" cy="172" r="24"/><circle cx="126" cy="158" r="30"/><circle cx="160" cy="174" r="22"/><rect x="92" y="172" width="70" height="22" rx="11"/>
+            </g>
+          </g>
+
+          <g class="layer" data-depth="16">
+            <!-- floating sphere and its shadow -->
+            <ellipse cx="208" cy="508" rx="24" ry="5" fill="#7d6040" opacity=".35"/>
+            <g class="bob">
+              <circle cx="208" cy="330" r="16" fill="#f4f1ea"/>
+              <circle cx="203" cy="325" r="1.6" fill="#c9c3b6"/><circle cx="211" cy="324" r="1.6" fill="#c9c3b6"/><circle cx="207" cy="333" r="1.6" fill="#c9c3b6"/><circle cx="215" cy="332" r="1.6" fill="#c9c3b6"/><circle cx="200" cy="334" r="1.6" fill="#c9c3b6"/>
+            </g>
+          </g>
+
+          <g class="layer" data-depth="6">
+            <!-- the figure -->
+            <ellipse cx="380" cy="560" rx="150" ry="16" fill="#7d6040" opacity=".35"/>
+            <path d="M190 600 C190 540 228 506 282 496 L305 490 L355 490 L378 496 C432 506 470 540 470 600 Z" fill="url(#suit)"/>
+            <path d="M305 490 L330 540 L355 490 Z" fill="#f2efe8"/>
+            <path d="M322 506 L330 552 L338 506 L330 498 Z" fill="#a33b2a"/>
+            <rect x="309" y="448" width="42" height="46" fill="#1d2448"/>
+            <g clip-path="url(#headClip)">
+              <rect x="240" y="270" width="180" height="200" fill="url(#nightIn)"/>
+              <circle cx="330" cy="372" r="70" fill="url(#glow)" opacity=".25"/>
+              <g stroke="#e8c468" stroke-width=".8" opacity=".7">
+                <line x1="290" y1="330" x2="318" y2="352"/><line x1="290" y1="330" x2="318" y2="392"/>
+                <line x1="290" y1="400" x2="318" y2="352"/><line x1="290" y1="400" x2="318" y2="392"/>
+                <line x1="318" y1="352" x2="352" y2="340"/><line x1="318" y1="352" x2="352" y2="404"/>
+                <line x1="318" y1="392" x2="352" y2="340"/><line x1="318" y1="392" x2="352" y2="404"/>
+                <line x1="352" y1="340" x2="376" y2="372"/><line x1="352" y1="404" x2="376" y2="372"/>
+              </g>
+              <g fill="#e8c468">
+                <circle cx="290" cy="330" r="3.2"/><circle cx="290" cy="400" r="3.2"/><circle cx="318" cy="352" r="3.2"/><circle cx="318" cy="392" r="3.2"/>
+                <circle cx="352" cy="340" r="3.2"/><circle cx="352" cy="404" r="3.2"/><circle cx="376" cy="372" r="4"/>
+              </g>
+              <g fill="#fff">
+                <circle class="twinkle" cx="272" cy="300" r="1.2"/><circle class="twinkle" cx="384" cy="306" r="1"/><circle class="twinkle" cx="300" cy="446" r="1.1"/>
+                <circle class="twinkle" cx="366" cy="440" r="1.3"/><circle class="twinkle" cx="398" cy="356" r="1"/><circle class="twinkle" cx="262" cy="372" r="1"/>
+              </g>
+              <g class="orbit">
+                <circle cx="330" cy="300" r="9" fill="#f4f1ea"/>
+                <circle cx="327" cy="297" r="1" fill="#c9c3b6"/><circle cx="333" cy="298" r="1" fill="#c9c3b6"/><circle cx="330" cy="303" r="1" fill="#c9c3b6"/>
+              </g>
+            </g>
+            <ellipse cx="330" cy="372" rx="76" ry="94" fill="none" stroke="#1a2142" stroke-width="3"/>
+          </g>
+
+          <g class="layer" data-depth="34">
+            <g class="drift-a" fill="#fff">
+              <circle cx="250" cy="214" r="16"/><circle cx="272" cy="204" r="22"/><circle cx="298" cy="214" r="15"/><rect x="248" y="214" width="52" height="15" rx="7"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <figcaption class="plaque"><b>Self-portrait as a context window</b>N. Madthila, 2026 · SVG and CSS on glass</figcaption>
+    </figure>
+  </div>
+
+  <div class="strip" aria-label="Highlights">
+    <div><b>155K</b><span>analyst hours a year saved by agent pipelines at BNY</span></div>
+    <div><b>200+</b><span>people using the agent-builder platform I built</span></div>
+    <div><b>93%</b><span>of frames with the golf club tracked on unseen video</span></div>
+    <div><b>12×</b><span>faster coaching feedback, 3 min to under 15 s</span></div>
+  </div>
+
+  <section id="work">
+    <div class="sec-head"><span class="label">Work</span><h2>Shipping ML where the users are</h2></div>
+    <div>
+      <article class="entry">
+        <div class="when">May – Aug 2026<span>Pittsburgh, PA</span></div>
+        <div>
+          <h3>BNY (Bank of New York Mellon)</h3>
+          <p class="role">AI/ML Engineer Intern, AI Hub</p>
+          <ul>
+            <li>Turned a one-off document pipeline into a config-driven agent platform: a shared orchestrator plus swappable agent skills, now running 6 production use cases and 25+ agents that save an estimated 155K analyst hours a year.</li>
+            <li>Built the self-service agent builder in React and TypeScript, with tools standardized behind MCP so every agent shares auth, least-privilege scoping and tracing. 200+ users; onboarding went from a week to a day.</li>
+            <li>Revived a written-off automation for a browser-gated remote app by reverse-engineering its authentication flow and replaying it programmatically, unblocking 4 operations teams.</li>
+          </ul>
+          <div class="tags"><span class="tag">multi-agent orchestration</span><span class="tag">MCP</span><span class="tag">structured extraction</span><span class="tag">human-in-the-loop eval</span><span class="tag">Kubernetes</span><span class="tag">Splunk</span></div>
+        </div>
+      </article>
+      <article class="entry">
+        <div class="when">Sep 2025 – Feb 2026<span>Pittsburgh, PA</span></div>
+        <div>
+          <h3>Perflections.ai</h3>
+          <p class="role">Founding AI/ML Engineer, part-time</p>
+          <ul>
+            <li>Found that a golf ball detector scoring 0.935 mAP@50-95 caught the ball in under 10% of real swing frames, traced it to augmentation that never appears in deployment, and fixed training and small-object inference settings.</li>
+            <li>Built hybrid tracking where YOLO detections seed SAM 2 mask propagation and periodic re-detection recovers lost tracks, all trained under an 8 GB VRAM budget.</li>
+          </ul>
+          <div class="tags"><span class="tag">YOLOv11</span><span class="tag">SAM 2</span><span class="tag">domain shift</span><span class="tag">mixed precision</span></div>
+        </div>
+      </article>
+      <article class="entry">
+        <div class="when">2022 – 2025<span>Bangalore, India</span></div>
+        <div>
+          <h3>Slamdunk.AI</h3>
+          <p class="role">Founding AI/ML Engineer · joined as intern, promoted to lead the recommendation team</p>
+          <ul>
+            <li>Built the coaching recommendation engine from scratch, then rebuilt it after sitting with tennis coaches: RAG over FAISS with LoRA-tuned models, cutting feedback latency from 3 minutes to under 15 seconds.</li>
+            <li>Shipped real-time athlete tracking with YOLOv8 and MediaPipe at 96% detection accuracy; ONNX export cut model size 40% and serving changes cut cloud cost 70%.</li>
+            <li>Led a team of 3 to ship the production MVP in 3 months.</li>
+          </ul>
+          <div class="tags"><span class="tag">RAG</span><span class="tag">LoRA</span><span class="tag">recommendation</span><span class="tag">edge CV</span><span class="tag">A/B testing</span></div>
+        </div>
+      </article>
+      <article class="entry">
+        <div class="when">2025 – now<span>Carnegie Mellon</span></div>
+        <div>
+          <h3>Teaching</h3>
+          <p class="role">Graduate TA · 95-891 Introduction to AI and 95-702 Distributed Systems · RA/TA at TEEL Labs teaching AI to U.S. Army personnel</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head"><span class="label">Projects &amp; research</span><h2>Things I built because I wanted to know</h2></div>
+    <div class="projects">
+      <a class="proj wide" href="https://github.com/nishsm" target="_blank" rel="noopener">
+        <span class="kind"><span>Open source · computer vision</span><span>↗</span></span>
+        <h3>SwingTrace</h3>
+        <p>Golf club tracking from ordinary swing video. A fine-tuned YOLO11m detector finds the shaft, club head and hands, then swing-path reconstruction recovers missed heads from shaft geometry and smooths the path with cubic splines. Weights on Hugging Face; trained on the CC BY 4.0 golf-club-tracking dataset from Roboflow Universe.</p>
+        <span class="metric">Club tracked in <b>93.4%</b> of 3,018 frames across 7 unseen videos, vs <b>71.6%</b> from head detection alone</span>
+      </a>
+
+      <div class="proj wide instrument">
+        <div>
+          <span class="kind"><span>Open source · ML systems</span><a href="https://github.com/nishsm" target="_blank" rel="noopener">repo ↗</a></span>
+          <h3>llm-roofline-agent</h3>
+          <p style="margin-top:10px">A roofline performance model for LLM inference: the arithmetic intensity of prefill and decode against a GPU's compute and bandwidth ceilings, validated on a T4. Try it: decode reads every weight once per step, so at batch 1 it does about 1 FLOP per byte and sits far below the 203 FLOP/byte ridge.</p>
+          <div class="ctrl">
+            <label for="bs">Decode batch</label>
+            <input id="bs" type="range" min="0" max="9" step="1" value="0">
+            <output id="bsOut" for="bs">1</output>
+          </div>
+          <div class="readout">
+            <div>Intensity<strong id="roAI">1 F/B</strong></div>
+            <div>Attainable<strong id="roPerf">0.32 TF/s</strong></div>
+            <div>Regime<strong id="roBound" class="bound">memory</strong></div>
+          </div>
+        </div>
+        <canvas id="roof" width="640" height="480" role="img" aria-label="Roofline chart for an NVIDIA T4 at FP16, with LLM decode and prefill points; the decode point moves as batch size changes."></canvas>
+      </div>
+
+      <a class="proj" href="https://github.com/nishsm" target="_blank" rel="noopener">
+        <span class="kind"><span>Research · agent security</span><span class="live">in progress</span></span>
+        <h3>Excessive Agency in LLM agents</h3>
+        <p>Independent study on OWASP LLM06 with the Applied Generative AI Research Lab at CMU. Extending LLM Guard with graph-based, attribute-based access control for multi-step agents and benchmarking defenses on AgentDojo.</p>
+        <span class="metric">Attacks: <b>prompt injection, data exfiltration, confused deputy</b></span>
+      </a>
+      <a class="proj" href="https://github.com/nishsm" target="_blank" rel="noopener">
+        <span class="kind"><span>Agents · security ops</span><span>↗</span></span>
+        <h3>Autonomous SOC Agent</h3>
+        <p>A two-node LangGraph system. An observer flags anomalous network flows with an Isolation Forest trained on CICIDS2017; a planner drafts incident recovery plans with a local LLM grounded in retrieved playbooks.</p>
+        <span class="metric"><b>LangGraph</b> · Isolation Forest · FAISS RAG · Ollama</span>
+      </a>
+      <a class="proj" href="https://doi.org/10.1109/ICACITE57410.2023.10182598" target="_blank" rel="noopener">
+        <span class="kind"><span>Publication · IEEE 2023</span><span>↗</span></span>
+        <h3>BBBNet</h3>
+        <p>Graph convolutional networks that predict whether a drug molecule crosses the blood-brain barrier, built with a pharma research analyst to speed up Alzheimer's drug screening. The repo recreates the paper, then compares GCN variants.</p>
+        <span class="metric"><b>91%</b> accuracy · <b>96.7%</b> AUROC</span>
+      </a>
+      <a class="proj" href="https://github.com/nishsm" target="_blank" rel="noopener">
+        <span class="kind"><span>Quant NLP</span><span class="live">building now</span></span>
+        <h3>SignalBench</h3>
+        <p>Does a QLoRA-tuned small open model beat API models at financial sentiment, and does the signal hold up when backtested on SEC 8-K filings? A benchmark built to answer exactly that.</p>
+        <span class="metric"><b>QLoRA</b> · open vs API LLMs · 8-K event backtest</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about">
+      <span class="label">About</span>
+      <div>
+        <p>I'm finishing an MS in Information Systems Management at Carnegie Mellon (December 2026) as a Cooper Fellow, after a CS degree from PES University in Bangalore.</p>
+        <p>The pattern in my work is simple. I go sit with the people who will use the thing, I don't trust a metric until it holds on real data, and I try to build the version that makes the next problem easier. I want to do that as a forward deployed or applied AI engineer, close to customers and close to the metal.</p>
+        <div class="facts">
+          <div><h4>Stack</h4><p>Python, TypeScript, SQL, PyTorch, LangGraph, MCP, Hugging Face, AWS, Docker</p></div>
+          <div><h4>Curious about</h4><p>LLM inference, ML systems, low-level programming, agent security</p></div>
+          <div><h4>Off hours</h4><p>Film photography, F1, chess, cooking, fragrance</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <p class="label" style="margin:0 0 20px">Contact</p>
+    <h2>Building something with agents or vision? Let's talk.</h2>
+    <div class="mail">
+      <code id="email">nishanthsm01@gmail.com</code>
+      <button class="btn" id="copyBtn" type="button">Copy</button>
+    </div>
+    <div class="links">
+      <a class="btn" href="https://github.com/nishsm" target="_blank" rel="noopener">github.com/nishsm</a>
+      <a class="btn" href="https://www.linkedin.com/in/nishanthsm01/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://huggingface.co/nishsm" target="_blank" rel="noopener">huggingface.co/nishsm</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Nishanth Madthila</span>
+    <span>Hand-built HTML · hosted on GitHub Pages</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // copy email
+  var btn = document.getElementById('copyBtn');
+  btn.addEventListener('click', function () {
+    var el = document.getElementById('email');
+    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); };
+    var fallback = function () { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected'; };
+    try { navigator.clipboard.writeText(el.textContent).then(done, fallback); } catch (e) { fallback(); }
+  });
+
+  // painting parallax: layers shift with the pointer, deeper layers more
+  var painting = document.getElementById('painting');
+  var layers = painting.querySelectorAll('.layer');
+  if (!reduce) {
+    painting.addEventListener('pointermove', function (e) {
+      var r = painting.getBoundingClientRect();
+      var nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
+      layers.forEach(function (l) { var d = +l.dataset.depth; l.style.transform = 'translate(' + (-nx * d) + 'px,' + (-ny * d * 0.6) + 'px)'; });
+    });
+    painting.addEventListener('pointerleave', function () { layers.forEach(function (l) { l.style.transform = ''; }); });
+  }
+
+  // roofline: NVIDIA T4, FP16 tensor peak 65 TFLOP/s, 320 GB/s GDDR6
+  var PEAK = 65e12, BW = 320e9, RIDGE = PEAK / BW;
+  var BATCHES = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512];
+  var PREFILL_AI = 512;
+  var cv = document.getElementById('roof'), ctx = cv.getContext('2d');
+  var slider = document.getElementById('bs');
+  var xMin = 0.5, xMax = 2048, yMin = 1e11, yMax = 2e14;
+  var cur = 1, target = 1, raf = null;
+  function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+  function attain(ai) { return Math.min(PEAK, BW * ai); }
+  function fmtTF(f) { var t = f / 1e12; return (t < 10 ? t.toFixed(2) : t.toFixed(1)) + ' TF/s'; }
+
+  function draw() {
+    var dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
+    if (!w || !h) return;
+    if (cv.width !== Math.round(w * dpr)) { cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+    var fg = css('--cloud'), muted = css('--mist'), gold = css('--gold'), grid = 'rgba(238,241,247,0.08)';
+    var pl = 46, pr = 12, pt = 14, pb = 34;
+    var X = function (v) { return pl + (Math.log10(v) - Math.log10(xMin)) / (Math.log10(xMax) - Math.log10(xMin)) * (w - pl - pr); };
+    var Y = function (v) { return h - pb - (Math.log10(v) - Math.log10(yMin)) / (Math.log10(yMax) - Math.log10(yMin)) * (h - pt - pb); };
+    ctx.font = '11px "JetBrains Mono", ui-monospace, monospace'; ctx.lineWidth = 1;
+    [1, 10, 100, 1000].forEach(function (v) {
+      ctx.strokeStyle = grid; ctx.beginPath(); ctx.moveTo(X(v), pt); ctx.lineTo(X(v), h - pb); ctx.stroke();
+      ctx.fillStyle = muted; ctx.textAlign = 'center'; ctx.fillText(String(v), X(v), h - pb + 16);
+    });
+    [1e12, 1e13, 1e14].forEach(function (v) {
+      ctx.strokeStyle = grid; ctx.beginPath(); ctx.moveTo(pl, Y(v)); ctx.lineTo(w - pr, Y(v)); ctx.stroke();
+      ctx.fillStyle = muted; ctx.textAlign = 'right'; ctx.fillText((v / 1e12) + 'T', pl - 8, Y(v) + 4);
+    });
+    ctx.strokeStyle = 'rgba(238,241,247,0.2)'; ctx.beginPath(); ctx.moveTo(pl, pt); ctx.lineTo(pl, h - pb); ctx.lineTo(w - pr, h - pb); ctx.stroke();
+    ctx.fillStyle = muted; ctx.textAlign = 'right'; ctx.fillText('FLOP / byte', w - pr, h - 4);
+    ctx.textAlign = 'left'; ctx.fillText('FLOP/s', pl + 6, pt + 10);
+    ctx.fillStyle = 'rgba(232,196,104,0.07)';
+    ctx.beginPath(); ctx.moveTo(X(xMin), h - pb); ctx.lineTo(X(xMin), Y(attain(xMin))); ctx.lineTo(X(RIDGE), Y(PEAK)); ctx.lineTo(X(xMax), Y(PEAK)); ctx.lineTo(X(xMax), h - pb); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = gold; ctx.lineWidth = 2.25;
+    ctx.beginPath(); ctx.moveTo(X(xMin), Y(attain(xMin))); ctx.lineTo(X(RIDGE), Y(PEAK)); ctx.lineTo(X(xMax), Y(PEAK)); ctx.stroke();
+    ctx.setLineDash([3, 4]); ctx.strokeStyle = muted; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(X(RIDGE), Y(PEAK)); ctx.lineTo(X(RIDGE), h - pb); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = muted; ctx.textAlign = 'left'; ctx.fillText('ridge ≈ ' + Math.round(RIDGE), X(RIDGE) + 6, h - pb - 8);
+    ctx.fillStyle = gold; ctx.textAlign = 'right'; ctx.fillText('65 TF/s peak', w - pr - 2, Y(PEAK) - 8);
+    ctx.save(); ctx.translate(X(3), Y(attain(3)) - 10);
+    ctx.rotate(Math.atan2(Y(attain(30)) - Y(attain(3)), X(30) - X(3))); ctx.textAlign = 'left'; ctx.fillText('320 GB/s', 0, 0); ctx.restore();
+    var px = X(PREFILL_AI), py = Y(attain(PREFILL_AI));
+    ctx.fillStyle = fg; ctx.beginPath(); ctx.arc(px, py, 4.5, 0, Math.PI * 2); ctx.fill();
+    ctx.textAlign = 'right'; ctx.fillText('prefill', px - 9, py + 16);
+    var dx = X(cur), dy = Y(attain(cur));
+    ctx.fillStyle = gold; ctx.globalAlpha = 0.2; ctx.beginPath(); ctx.arc(dx, dy, 12, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(dx, dy, 5.5, 0, Math.PI * 2); ctx.fill();
+    ctx.textAlign = cur > 100 ? 'right' : 'left'; ctx.fillText('decode', dx + (cur > 100 ? -12 : 12), dy + 18);
+  }
+  function update() {
+    var b = BATCHES[+slider.value]; target = b;
+    document.getElementById('bsOut').textContent = b;
+    document.getElementById('roAI').textContent = b + ' F/B';
+    document.getElementById('roPerf').textContent = fmtTF(attain(b));
+    document.getElementById('roBound').textContent = b < RIDGE ? 'memory' : 'compute';
+    if (reduce) { cur = target; draw(); return; }
+    if (!raf) raf = requestAnimationFrame(step);
+  }
+  function step() {
+    var lc = Math.log(cur), lt = Math.log(target); lc += (lt - lc) * 0.18; cur = Math.exp(lc); draw();
+    if (Math.abs(lt - lc) > 0.002) raf = requestAnimationFrame(step); else { cur = target; draw(); raf = null; }
+  }
+  slider.addEventListener('input', update);
+  window.addEventListener('resize', draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  draw(); update();
+})();
+</script>
+</body>
+</html>
